@@ -28,7 +28,15 @@ WORKDIR /app
 
 # Install Python dependencies
 COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+# Compatibility fixes for GCC 14 + glibc on aarch64:
+#   - dtcc-mesher: cdt.c uses SIZE_MAX without including <stdint.h>  → -include stdint.h
+#   - fiona 1.10.1: uses VSIStatBufL (struct stat64) which requires  → -D_GNU_SOURCE
+#     _LARGEFILE64_SOURCE (implied by _GNU_SOURCE) to be fully defined
+ENV CFLAGS="-D_GNU_SOURCE -include stdint.h"
+# Use BuildKit cache mount so the pip download cache persists across image rebuilds.
+# Remove --no-cache-dir so pip can reuse downloaded wheels on subsequent builds.
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install -r requirements.txt
 
 # Copy project
 COPY . /app/

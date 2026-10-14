@@ -261,3 +261,8 @@ pip-delete-this-directory.txt
 package-lock.json.bak
 yarn.lock.bak
 
+# Runtime scheduler state and generated geometry previews.
+/backend/celerybeat-schedule*
+/backend/celerybeat.pid
+/backend/test_output/
+/runs/
