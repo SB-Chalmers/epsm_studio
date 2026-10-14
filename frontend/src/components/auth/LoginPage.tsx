@@ -13,12 +13,12 @@ import {
   Link,
   Divider,
   Container,
+  Collapse,
   useTheme as useMuiTheme
 } from '@mui/material';
 import { Mail, Eye, EyeOff, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
-import AuthTest from './AuthTest';
 import LoginPageExplainer from './LoginPageExplainer';
 
 const LoginPage = () => {
@@ -28,6 +28,7 @@ const LoginPage = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -73,7 +74,7 @@ const LoginPage = () => {
   // }
 
   return (
-    <Box sx={{ 
+    <Box sx={{
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
@@ -81,26 +82,26 @@ const LoginPage = () => {
       color: 'text.primary'
     }}>
       {/* Header */}
-      <Box sx={{ 
-        display: 'flex', 
-        alignItems: 'center', 
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'center',
         justifyContent: 'space-between',
         p: 3,
         borderBottom: 1,
         borderColor: 'divider'
       }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <img 
-            src={isDarkMode ? '/media/chalmers_logo_dark_theme.png' : '/media/chalmers_logo_light_theme.png'} 
-            alt="Chalmers Logo" 
+          <img
+            src={isDarkMode ? '/media/chalmers_logo_dark_theme.png' : '/media/chalmers_logo_light_theme.png'}
+            alt="Chalmers Logo"
             style={{ height: 40 }}
           />
-          <Typography 
-            variant="h4" 
-            color="primary" 
-            sx={{ 
+          <Typography
+            variant="h4"
+            color="primary"
+            sx={{
               fontWeight: 700,
-              background: isDarkMode 
+              background: isDarkMode
                 ? 'linear-gradient(45deg, #90caf9 30%, #42a5f5 90%)'
                 : 'linear-gradient(45deg, #1976d2 30%, #42a5f5 90%)',
               WebkitBackgroundClip: 'text',
@@ -110,9 +111,9 @@ const LoginPage = () => {
             EPSM
           </Typography>
         </Box>
-        <IconButton 
-          onClick={toggleTheme} 
-          sx={{ 
+        <IconButton
+          onClick={toggleTheme}
+          sx={{
             p: 1.5,
             bgcolor: isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
             '&:hover': {
@@ -125,9 +126,9 @@ const LoginPage = () => {
       </Box>
 
       {/* Main Content */}
-      <Container 
-        maxWidth="xl" 
-        sx={{ 
+      <Container
+        maxWidth="xl"
+        sx={{
           flexGrow: 1,
           display: 'flex',
           alignItems: 'center',
@@ -142,8 +143,8 @@ const LoginPage = () => {
 
           {/* Sign In Card */}
           <Grid item xs={12} md={5}>
-            <Card 
-              sx={{ 
+            <Card
+              sx={{
                 maxWidth: 480,
                 mx: 'auto',
                 mt: { xs: 4, md: 0 },
@@ -152,22 +153,29 @@ const LoginPage = () => {
               }}
             >
               <CardContent sx={{ p: 4 }}>
+                {/* Title - adjust based on SAML status */}
                 <Typography variant="h5" align="center" gutterBottom>
-                  {isSignUp ? 'Create Account' : 'Sign In'}
+                  {loginInfo?.saml_enabled
+                    ? 'Welcome to EPSM'
+                    : (isSignUp ? 'Create Account' : 'Sign In')
+                  }
                 </Typography>
-                <Typography 
-                  variant="body2" 
-                  color="text.secondary" 
-                  align="center" 
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  align="center"
                   sx={{ mb: 4 }}
                 >
-                  Access restricted to Chalmers University staff and researchers
+                  {loginInfo?.saml_enabled
+                    ? 'Energy Performance Simulation Manager'
+                    : 'Access restricted to Chalmers University staff and researchers'
+                  }
                 </Typography>
 
                 {error && (
-                  <Alert 
-                    severity="error" 
-                    sx={{ 
+                  <Alert
+                    severity="error"
+                    sx={{
                       mb: 3,
                       '& .MuiAlert-message': {
                         width: '100%'
@@ -178,81 +186,8 @@ const LoginPage = () => {
                   </Alert>
                 )}
 
-                <form onSubmit={handleSubmit}>
-                  <TextField
-                    fullWidth
-                    label="Chalmers Email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    margin="normal"
-                    required
-                    autoComplete="email"
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Mail size={20} />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-
-                  <TextField
-                    fullWidth
-                    label="Password"
-                    name="password"
-                    type={showPassword ? 'text' : 'password'}
-                    value={formData.password}
-                    onChange={handleChange}
-                    margin="normal"
-                    required
-                    autoComplete={isSignUp ? 'new-password' : 'current-password'}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            onClick={() => setShowPassword(!showPassword)}
-                            edge="end"
-                            aria-label={showPassword ? 'Hide password' : 'Show password'}
-                          >
-                            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-
-                  <Button
-                    type="submit"
-                    variant={loginInfo?.saml_enabled ? "outlined" : "contained"}
-                    fullWidth
-                    size={loginInfo?.saml_enabled ? "medium" : "large"}
-                    disabled={loading}
-                    sx={{ 
-                      mt: 3,
-                      py: loginInfo?.saml_enabled ? 1 : 1.5,
-                      ...(loginInfo?.saml_enabled ? {
-                        borderColor: muiTheme.palette.primary.main,
-                        color: muiTheme.palette.primary.main,
-                        '&:hover': {
-                          borderColor: muiTheme.palette.primary.dark,
-                          backgroundColor: muiTheme.palette.primary.main + '08',
-                        }
-                      } : {
-                        bgcolor: muiTheme.palette.primary.main,
-                        '&:hover': {
-                          bgcolor: muiTheme.palette.primary.dark,
-                        }
-                      })
-                    }}
-                  >
-                    {isSignUp ? 'Create Account' : (loginInfo?.saml_enabled ? 'Admin Sign In' : 'Sign In')}
-                  </Button>
-                </form>
-
                 {/* SAML Login Button - Primary login method in production */}
-                {loginInfo?.saml_enabled && (
+                {loginInfo?.saml_enabled ? (
                   <>
                     <Button
                       variant="contained"
@@ -260,8 +195,8 @@ const LoginPage = () => {
                       size="large"
                       onClick={signInWithSAML}
                       disabled={loading}
-                      sx={{ 
-                        mb: 3,
+                      sx={{
+                        mb: 2,
                         py: 1.5,
                         bgcolor: '#00d0be',
                         color: '#fff',
@@ -275,17 +210,166 @@ const LoginPage = () => {
                       Login with Chalmers CID
                     </Button>
 
-                    <Divider sx={{ my: 3 }}>
-                      <Typography variant="body2" color="text.secondary">
-                        Administrator Access
-                      </Typography>
-                    </Divider>
-                  </>
-                )}
+                    <Typography
+                      variant="caption"
+                      color="text.secondary"
+                      align="center"
+                      sx={{ display: 'block', mb: 3 }}
+                    >
+                      Use your Chalmers credentials to access EPSM
+                    </Typography>
 
-                {/* Development-only features */}
-                {(!loginInfo || !loginInfo.saml_enabled) && (
+                    {/* Collapsible Admin Login */}
+                    <Collapse in={showAdminLogin}>
+                      <Divider sx={{ mb: 3 }} />
+
+                      <form onSubmit={handleSubmit}>
+                        <TextField
+                          fullWidth
+                          label="Admin Email"
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          margin="normal"
+                          required
+                          autoComplete="email"
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <Mail size={20} />
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+
+                        <TextField
+                          fullWidth
+                          label="Password"
+                          name="password"
+                          type={showPassword ? 'text' : 'password'}
+                          value={formData.password}
+                          onChange={handleChange}
+                          margin="normal"
+                          required
+                          autoComplete="current-password"
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <IconButton
+                                  onClick={() => setShowPassword(!showPassword)}
+                                  edge="end"
+                                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                >
+                                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                </IconButton>
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+
+                        <Button
+                          type="submit"
+                          variant="outlined"
+                          fullWidth
+                          size="medium"
+                          disabled={loading}
+                          sx={{
+                            mt: 2,
+                            mb: 2
+                          }}
+                        >
+                          Admin Sign In
+                        </Button>
+                      </form>
+                    </Collapse>
+
+                    {/* Admin login toggle */}
+                    <Typography
+                      variant="caption"
+                      align="center"
+                      sx={{ display: 'block', mt: 2 }}
+                    >
+                      <Link
+                        component="button"
+                        variant="caption"
+                        onClick={() => setShowAdminLogin(!showAdminLogin)}
+                        sx={{
+                          textDecoration: 'none',
+                          color: 'text.secondary',
+                          '&:hover': {
+                            color: 'text.primary',
+                          }
+                        }}
+                      >
+                        {showAdminLogin ? 'Hide' : 'Administrator Access'}
+                      </Link>
+                    </Typography>
+                  </>
+                ) : (
                   <>
+                    {/* Development mode - standard login form */}
+                    <form onSubmit={handleSubmit}>
+                      <TextField
+                        fullWidth
+                        label="Chalmers Email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        margin="normal"
+                        required
+                        autoComplete="email"
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <Mail size={20} />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+
+                      <TextField
+                        fullWidth
+                        label="Password"
+                        name="password"
+                        type={showPassword ? 'text' : 'password'}
+                        value={formData.password}
+                        onChange={handleChange}
+                        margin="normal"
+                        required
+                        autoComplete={isSignUp ? 'new-password' : 'current-password'}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={() => setShowPassword(!showPassword)}
+                                edge="end"
+                                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                              >
+                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        fullWidth
+                        size="large"
+                        disabled={loading}
+                        sx={{
+                          mt: 3,
+                          py: 1.5
+                        }}
+                      >
+                        {isSignUp ? 'Create Account' : 'Sign In'}
+                      </Button>
+                    </form>
+
+                    {/* Development-only features */}
                     <Divider sx={{ my: 3 }} />
 
                     <Button
@@ -294,7 +378,7 @@ const LoginPage = () => {
                       size="large"
                       onClick={handleDemoLogin}
                       disabled={loading}
-                      sx={{ 
+                      sx={{
                         mb: 2,
                         py: 1.5,
                         borderColor: muiTheme.palette.primary.main,
@@ -307,12 +391,8 @@ const LoginPage = () => {
                     >
                       Demo Login (demo@chalmers.se)
                     </Button>
-                  </>
-                )}
 
-                {/* Account creation toggle - Only show in development */}
-                {(!loginInfo || !loginInfo.saml_enabled) && (
-                  <>
+                    {/* Account creation toggle - Only show in development */}
                     <Divider sx={{ my: 2 }} />
 
                     <Typography variant="body2" align="center">
@@ -321,7 +401,7 @@ const LoginPage = () => {
                         component="button"
                         variant="body2"
                         onClick={() => setIsSignUp(!isSignUp)}
-                        sx={{ 
+                        sx={{
                           textDecoration: 'none',
                           color: 'primary.main',
                           '&:hover': {
@@ -334,8 +414,6 @@ const LoginPage = () => {
                     </Typography>
                   </>
                 )}
-
-                <AuthTest />
               </CardContent>
             </Card>
           </Grid>

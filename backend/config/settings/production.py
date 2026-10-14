@@ -29,6 +29,12 @@ SECURE_HSTS_PRELOAD = True
 # Proxy/SSL Headers (nginx sets X-Forwarded-Proto)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# CSRF Settings - Trust own domain for SAML POST requests
+CSRF_TRUSTED_ORIGINS = [
+    'https://epsm.chalmers.se',
+    'https://epsm.ita.chalmers.se',
+]
+
 # CORS Settings
 CORS_ALLOWED_ORIGINS = [
     "https://epsm.chalmers.se",
@@ -70,46 +76,46 @@ AUTHENTICATION_BACKENDS = [
 SAML_CONFIG = {
     'xmlsec_binary': '/usr/bin/xmlsec1',
     'entityid': 'https://epsm.chalmers.se/saml/metadata/',
-    
+
     # Certificate configuration for both signing and encryption
     'key_file': '/app/saml_certs/sp_private_key.pem',
     'cert_file': '/app/saml_certs/sp_certificate.pem',
-    
-    # Security: Force stronger algorithms at the global level
+
+    # Security: Force SHA256 algorithms (CRITICAL: Must be set at config root level for pysaml2)
+    # These settings control what algorithm is used when signing outgoing SAML requests
     'signing_algorithm': 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256',
     'digest_algorithm': 'http://www.w3.org/2001/04/xmlenc#sha256',
-    
+
+    # CRITICAL: Explicitly configure xmlsec1 encryption and signature algorithms
+    # This ensures pysaml2 passes the correct algorithm parameters to xmlsec1
+    'encryption_keypairs': [{
+        'key_file': '/app/saml_certs/sp_private_key.pem',
+        'cert_file': '/app/saml_certs/sp_certificate.pem',
+    }],
+
     # Additional security settings to enforce strong algorithms
     'preferred_binding': {
         'single_sign_on_service': 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
         'single_logout_service': 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-REDIRECT',
     },
-    
-    # Force the signing and digest algorithms
-    'policy': {
-        'default': {
-            'sign_alg': 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256',
-            'digest_alg': 'http://www.w3.org/2001/04/xmlenc#sha256',
-        }
-    },
-    
+
     'service': {
         'sp': {
             'name': 'EPSM - Energy Performance Simulation Manager',
             'name_id_format': 'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent',
-            
+
             # Security: Enable signing for outgoing requests but allow unsigned responses from IdP
             # Updated Oct 2025: Chalmers IdP sends unsigned responses, so we must allow them
             'want_assertions_signed': False,  # Allow unsigned assertions from Chalmers IdP
             'want_response_signed': False,    # Allow unsigned responses from Chalmers IdP
             'authn_requests_signed': True,    # Still sign our outgoing requests
             'logout_requests_signed': True,   # Still sign our logout requests
-            
+
             # Certificate configuration: No 'use' attribute so cert can be used for both signing and encryption
             # Björn's feedback: "If you can remove 'use="signing"' it will be used for both signing and encryption"
             # Note: pysaml2 doesn't support 'key_descriptor' without 'use', so we rely on global cert config
             # The custom metadata view will strip 'use' attributes from the generated metadata
-            
+
             'endpoints': {
                 'assertion_consumer_service': [
                     ('https://epsm.chalmers.se/saml/acs/', 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST'),
@@ -118,7 +124,7 @@ SAML_CONFIG = {
                     ('https://epsm.chalmers.se/saml/sls/', 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-REDIRECT'),
                 ],
             },
-            
+
             # REFEDS Personalized Access required attributes
             'required_attributes': [
                 'eduPersonPrincipalName',  # or samlSubjectID
@@ -126,7 +132,7 @@ SAML_CONFIG = {
                 'givenName',
                 'sn',
             ],
-            
+
             # REFEDS Personalized Access optional attributes
             'optional_attributes': [
                 'displayName',
@@ -135,12 +141,12 @@ SAML_CONFIG = {
                 'eduPersonAssurance',
                 'subject-id',  # FIXED: Chalmers IdP sends 'subject-id' (hyphenated), not 'samlSubjectID' (camelCase)
             ],
-            
+
             # Allow unsolicited responses (IdP-initiated login)
             'allow_unsolicited': True,
         },
     },
-    
+
     # Chalmers Identity Provider metadata
     'metadata': {
         'remote': [
@@ -153,7 +159,7 @@ SAML_CONFIG = {
             },
         ],
     },
-    
+
     # Contact information for SP metadata
     'contact_person': [
         {
@@ -171,7 +177,7 @@ SAML_CONFIG = {
             'contact_type': 'administrative',
         },
     ],
-    
+
     'organization': {
         'name': [('Chalmers University of Technology', 'en')],
         'display_name': [('EPSM - Energy Performance Simulation Manager', 'en')],
@@ -186,19 +192,19 @@ SAML_ATTRIBUTE_MAPPING = {
     # urn:oasis:names:tc:SAML:attribute:subject-id or eduPersonPrincipalName
     'eduPersonPrincipalName': ('username',),  # ssanjay@chalmers.se -> ssanjay
     'subject-id': ('username',),  # FIXED: Chalmers IdP sends 'subject-id' (hyphenated), not 'samlSubjectID'
-    
+
     # Email address (urn:oid:0.9.2342.19200300.100.1.3)
     'mail': ('email',),
-    
+
     # Display name (urn:oid:2.16.840.1.113730.3.1.241)
     'displayName': ('first_name', 'last_name'),  # Split by custom_update_user
-    
+
     # Given name (urn:oid:2.5.4.42)
     'givenName': ('first_name',),
-    
+
     # Surname (urn:oid:2.5.4.4)
     'sn': ('last_name',),
-    
+
     # Note: The following are handled in custom_update_user but not directly mapped:
     # - eduPersonScopedAffiliation (urn:oid:1.3.6.1.4.1.5923.1.1.1.9)
     # - schacHomeOrganization (urn:oid:1.3.6.1.4.1.25178.1.2.9)
@@ -220,6 +226,11 @@ SESSION_COOKIE_AGE = 3600 * 8  # 8 hours
 SESSION_SAVE_EVERY_REQUEST = True
 SESSION_COOKIE_SAMESITE = 'None'  # Required for cross-origin SAML redirect flow
 SESSION_COOKIE_SECURE = True  # Required when SameSite=None
+
+# SAML Security - djangosaml2 handles CSRF protection internally
+# ACS endpoint must be exempt from Django's CSRF middleware
+SAML_IGNORE_LOGOUT_ERRORS = True
+SAML_CREATE_UNKNOWN_USER = True
 
 # Logging
 LOGGING = {
@@ -273,7 +284,7 @@ LOGGING = {
 if os.environ.get('SENTRY_DSN'):
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration
-    
+
     sentry_sdk.init(
         dsn=os.environ.get('SENTRY_DSN'),
         integrations=[DjangoIntegration()],
