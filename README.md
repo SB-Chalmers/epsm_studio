@@ -1,5 +1,13 @@
 # EPSM - Energy Performance Simulation Manager
 
+The independent Studio rebuild starts on `codex/studio-rebuild`, from `main`.
+See the [incremental plan](docs/rebuild/plan.md),
+[student journeys](docs/rebuild/student-journeys.md),
+[cache policy](docs/rebuild/cache-policy.md), and
+[minimal frontend scaffold](apps/studio/README.md).
+Those documents describe proposed features; the scaffold implements no research
+workflows. The production application described below remains unchanged.
+
 [![Version](https://img.shields.io/badge/version-0.2.7-blue.svg)](https://github.com/snjsomnath/epsm/releases/tag/v0.2.7)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE.md)
 [![React](https://img.shields.io/badge/React-18.2-61DAFB.svg?logo=react)](https://reactjs.org/)
