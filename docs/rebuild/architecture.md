@@ -1,16 +1,23 @@
 # Proposed Studio architecture
 
-**Status: design proposal, 20 October 2026.** Only the separate frontend scaffold
-and rebuild documentation are in scope now. Authentication, HTTP adapters,
-persistence, workers, package integration, Viewer integration and deployment remain
-future work. The legacy application remains in its existing directories.
+**Status: production target architecture, updated 20 October 2026.** The
+[frontend prototype](frontend-prototype.md) implements browser persistence,
+authoring, the pinned Viewer and illustrative evaluations. Real authentication,
+HTTP adapters, server persistence, workers, scientific package integration and
+deployment remain future work. The [delivery plan](plan.md) continues with a minimal
+backend/database, SSO and private workspaces before simulation execution. Legacy
+data is not migrated. Its application source and deployment files are removed from
+this checkout; its remote runtime is retired after replacement cutover. The
+pre-cleanup Studio source remains in Git history at `f089d03`.
 
 ## Source evidence and its limits
 
 The following local `main` references were inspected for this plan. A source
 revision establishes what was available to inspect; it does not establish that all
 packages form a tested combination or that a remote service is configured that
-way. No server, live database, IdP or engine was contacted for this plan.
+way. This initial package inventory was source-only: it did not contact a server,
+live database, IdP or engine. Later legacy-server inspection and the user's
+successful legacy SSO test do not establish that the new application works.
 
 | Repository | Inspected main revision | Evidence used |
 | --- | --- | --- |
@@ -69,44 +76,62 @@ method name in application code or import a private helper.
 
 ## A small deployable shape
 
-The proposed runtime has one frontend, one Python application and one worker
-process using a tested installed-package environment. Keep code in this repository
-and build one release manifest. Do not turn every scientific package into a
-separate network service or deployment repository.
+The initial implementation direction is a React/Vite frontend, one Django web
+application, PostgreSQL state and a Celery/Redis dispatch queue feeding a bounded
+worker pool. Introduce the backend before SSO and the queue at the first simulation
+milestone. Start with one worker using a tested installed-package environment.
+Keep web adapters and release assets in Studio; scientific packages are installed
+libraries, not separate network services or deployment repositories.
 
 ```mermaid
 flowchart LR
-    Browser[Student browser] --> App[Studio application]
+    Browser[Student browser] --> Proxy[HTTPS proxy]
+    Proxy --> Frontend[Studio frontend]
+    Proxy --> App[Django API and SAML]
     Browser --> Viewer[Separate Viewer renderer]
-    App --> State[(Projects, drafts, jobs and permissions)]
+    App --> State[(PostgreSQL: accounts, owned work and jobs)]
     App --> Files[(Retained inputs and result artifacts)]
+    App --> Catalogue[(Versioned Data catalogue)]
     App --> DB[Read-only evidence database]
-    App --> Worker[Studio worker]
+    State --> Dispatch[Outbox dispatcher]
+    Dispatch --> Queue[Celery and Redis]
+    Queue --> Worker[Bounded simulation workers]
     Worker --> Packages[Installed EPSM packages]
     Packages --> Engines[Selected RC or EnergyPlus engine]
     Worker --> Files
     Worker --> State
 ```
 
-This is a target diagram, not a description of implemented processes. The initial
-scaffold lives at `apps/studio/`. Decide the smallest Python service layout at the
-package-contract and identity gates; no new backend directory or service is
-required by this document alone. Retain a queue only when its delivery, scheduling
-or recovery semantics are needed and tested. Long work always runs outside the
-web request and is represented by durable jobs.
+This is a target diagram, not a description of implemented processes. The frontend
+prototype lives at `frontend/`; `backend/` currently contains service guidance only.
+Introduce the smallest new Python service there at the backend gate. Long work
+always runs outside the web request and is represented by durable PostgreSQL
+jobs. The outbox dispatcher publishes accepted work reliably; Redis is transport,
+not the source of job status or result evidence. See the
+[queue requirements](plan.md#central-simulation-execution)
+for delivery, claims, retries, fairness, quotas and recovery gates.
 
-Use PostgreSQL for application records and an explicit persistent artifact
-directory initially. The evidence database is a separate read-only source: its
-credentials never reach the browser or a saved model. Do not share source-database
+Use shared PostgreSQL application tables with enforced user/project ownership,
+not a physical database for each account. Keep a logically separated, versioned
+material catalogue consumed through Data, and an explicit private persistent
+artifact directory initially. Every file download requires authorisation; result
+files are not public static assets. The evidence database is a separate read-only
+source: its credentials never reach the browser or a saved model. Do not share source-database
 write privileges with application persistence. Storage quotas and retention apply
 to their actual owners; [cache eviction](cache-policy.md) is a separate policy.
 
 For future same-server delivery, build/test the application and worker artifacts
-once, record their digests and package/engine identities, and deploy those exact
-artifacts. Keep runtime secrets and certificates outside images. Run migrations as
-one deliberate step, preserve the previous release manifest, and verify backup,
-restore and readiness before a cutover. The current branch does not change the
-legacy Compose files, CI workflow, remote server or certificates.
+once in CI, record their digests and package/engine identities, and deploy those
+exact artifacts with a dedicated trusted deployment runner. Release pushes to
+`main` can deploy after required checks. Use separate development/staging/production
+state and secrets, serialize deployments, run migrations deliberately and switch
+routing after readiness checks. Keep runtime secrets and private keys outside Git
+and images. Preserve the previous manifest and verify database-plus-file restore
+and recovery before each cutover. Drain workers or retain matching runtimes for
+accepted jobs during releases. Retire only confirmed legacy resources after the
+replacement is accepted; preserve infrastructure and credentials it still needs.
+The new CI workflow checks only the frontend and design assets. Server deployment
+and production routing are not implemented by this baseline cleanup.
 
 ## Data passed through the application
 
@@ -115,6 +140,7 @@ HTTP endpoints.
 
 | Concept | Required content and behaviour |
 | --- | --- |
+| Account and external identity | Internal user ID and unique IdP issuer/stable scoped subject; first validated login creates a normal account, later logins reuse it; explicit application roles and fresh sessions |
 | Project draft | Owner/access policy, research question, selected targets/context, physical model, choices and provenance; server revision and save history; editable before submission |
 | Portable source record | Source IDs, evidence release, component geometry/heights, missing/conflicting values and quality findings; no live connection or credentials |
 | Physical baseline | Package-owned Building state with effective catalogue assignments, explicit assumptions, units/CRS/orientation, evidence and readiness |
@@ -224,8 +250,9 @@ draft recovery and separate, deliberate run submission. Existing source tests an
 historical UI audit files are useful starting evidence; they have not been rerun
 here and do not prove compatibility with the new scene format or packages.
 
-Use this inventory at M1/M3 to choose a small licensed extraction or an independent
-implementation of the needed interactions. Check the resulting Viewer/editor with
+Use this inventory at the package-contract and M9 building-editor gates to choose
+a small licensed extraction or an independent implementation of the needed
+interactions. Check the resulting Viewer/editor with
 actual Core scenes and the student journeys. The scaffold gains no editor feature
 merely because a candidate is listed here.
 
@@ -234,7 +261,12 @@ merely because a candidate is listed here.
 Use same-origin application routes and protected downloads. Authenticate HTTP and
 any progress transport, authorise every project/case/artifact access, and keep
 application administrator roles explicit. SAML attribute mapping must preserve
-stable identities without using browser-supplied owner IDs as authority.
+stable scoped identities without using browser-supplied owner IDs as authority.
+Keep the registered public SAML identity/callbacks for the first replacement;
+coordinate metadata and signing-key changes with Chalmers IT. Do not import legacy
+sessions or equate institutional affiliation with administrator access. The
+[account and storage contract](plan.md#accounts-ownership-and-storage) defines
+fresh provisioning, private workspaces and the required two-user access tests.
 
 One job submission identifies one frozen experiment. Handle repeated requests
 without silently creating duplicate work. A worker claims bounded work, records an
@@ -243,8 +275,9 @@ Recovery reconciles interrupted attempts before scheduling more work. The transp
 cannot be the only record of progress; a websocket disconnect is not a failed run.
 
 Cancellation, idempotent submission and job scheduling are Studio requirements
-still to be designed. Workflows already provides prepared-case and attempt/resume
-semantics, but its existence does not establish a complete web job lifecycle.
+planned above and still to be implemented and checked. Workflows already provides
+prepared-case and attempt/resume semantics, but its existence does not establish
+a complete web job lifecycle.
 Studio must adapt and test the actual public operations rather than advertise
 unimplemented cancellation methods.
 

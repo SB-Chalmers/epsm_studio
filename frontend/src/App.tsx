@@ -1,52 +1,45 @@
-// React import not required with the new JSX transform
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import CssBaseline from '@mui/material/CssBaseline';
-import { AuthProvider } from './context/AuthContext';
-import { ThemeProvider } from './context/ThemeContext';
-import { DatabaseProvider } from './context/DatabaseContext';
-import { SimulationProvider } from './context/SimulationContext';
-import AppLayout from './components/layout/AppLayout';
-import LoginPage from './components/auth/LoginPage';
-import HomePage from './components/home/HomePage';
-import SelectAreaPage from './components/selectarea/SelectAreaPage';
-import DatabasePage from './components/database/DatabasePage';
-import BaselinePage from './components/baseline/BaselinePage';
-import ScenarioPage from './components/scenario/ScenarioPage';
-import SimulationPage from './components/simulation/SimulationPage';
-import ResultsPage from './components/results/ResultsPage';
-import ExportPage from './components/export/ExportPage';
-import AdminDashboard from './components/auth/AdminDashboard';
-import './App.css';
+// SPDX-License-Identifier: MIT
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import { BrowserRouter, Link, NavLink, Navigate, Outlet, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Building2, ChevronDown, Database, FolderKanban, House, Info, LogOut, Menu, Plus, Settings, X } from 'lucide-react';
+import { StudioProvider, useStudio } from './state/StudioContext';
+import { studioClient } from './data/client';
+import type { Project } from './domain/types';
+import { EmptyState, Notice } from './components/UI';
+import { LoginPage } from './pages/LoginPage';
+import { AboutPage, HomePage, MaterialsPage, ProjectOverview, ProjectsPage, SettingsPage } from './pages/WorkspacePages';
+const NewProjectPage = lazy(() => import('./pages/NewProjectPage').then(module => ({default:module.NewProjectPage})));
+const BuildingsPage = lazy(() => import('./pages/BuildingsPage').then(module => ({default:module.BuildingsPage})));
+const BaselinePage = lazy(() => import('./pages/BaselinePage').then(module => ({default:module.BaselinePage})));
+const StudiesPage = lazy(() => import('./pages/StudiesPage').then(module => ({default:module.StudiesPage})));
+const ResultsPage = lazy(() => import('./pages/ResultsPage').then(module => ({default:module.ResultsPage})));
+import mark from '../../design/pocket-cad/icons/svg/epsm_studio.svg';
 
-function App() {
-  return (
-    <ThemeProvider>
-      <CssBaseline />
-      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <AuthProvider>
-          <DatabaseProvider>
-            <SimulationProvider>
-              <Routes>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/" element={<AppLayout />}>
-                  <Route index element={<HomePage />} />
-                  <Route path="selectarea" element={<SelectAreaPage />} />
-                  <Route path="database/*" element={<DatabasePage />} />
-                  <Route path="baseline" element={<BaselinePage />} />
-                  <Route path="scenario" element={<ScenarioPage />} />
-                  <Route path="simulation" element={<SimulationPage />} />
-                  <Route path="results" element={<ResultsPage />} />
-                  <Route path="export" element={<ExportPage />} />
-                  <Route path="admin" element={<AdminDashboard />} />
-                  <Route path="*" element={<Navigate to="/\" replace />} />
-                </Route>
-              </Routes>
-            </SimulationProvider>
-          </DatabaseProvider>
-        </AuthProvider>
-      </Router>
-    </ThemeProvider>
-  );
+function Layout() {
+ const {account, settings, projects, loading, error, refresh, signOut} = useStudio();const location=useLocation();const navigate=useNavigate();
+ const menuButton=useRef<HTMLButtonElement>(null); const userButton=useRef<HTMLButtonElement>(null); const sidebar=useRef<HTMLElement>(null);
+ const [menu,setMenu]=useState(false); const [userMenu,setUserMenu]=useState(false);
+ const projectId=location.pathname.match(/^\/projects\/([^/]+)/)?.[1];const project=projects.find(p=>p.id===projectId);
+ useEffect(()=>{setMenu(false);setUserMenu(false);void refresh();},[location.pathname,refresh]);
+ useEffect(()=>{if(!menu&&!userMenu)return;const key=(event:KeyboardEvent)=>{if(event.key==='Escape'){setMenu(false);setUserMenu(false);(menu?menuButton:userButton).current?.focus();}if(menu&&event.key==='Tab'){const links=sidebar.current?.querySelectorAll<HTMLElement>('a,button');if(!links?.length)return;const first=links[0],last=links[links.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}}};document.addEventListener('keydown',key);if(menu)sidebar.current?.querySelector<HTMLElement>('a')?.focus();return()=>document.removeEventListener('keydown',key);},[menu,userMenu]);
+ useEffect(()=>{document.title=project?`${project.name} · EPSM Studio`:'EPSM Studio';},[project]);
+ if(loading)return <div className="loading-screen" role="status">Opening your workspace…</div>;
+ if(!account)return <Navigate to="/login" replace/>;
+ const links=[{to:'/home',name:'Home',Icon:House},{to:'/projects',name:'Projects',Icon:FolderKanban},{to:'/materials',name:'Material Database',Icon:Database},{to:'/about',name:'About',Icon:Info}];
+ return <div className={`app-shell ${settings?.reducedMotion?'reduced-motion':''}`} data-density={settings?.density||'comfortable'}><a className="skip-link" href="#main-content">Skip to content</a><header className="app-header"><button ref={menuButton} className="icon-button mobile-menu" aria-controls="global-sidebar" onClick={()=>setMenu(!menu)} aria-label={menu?'Close navigation':'Open navigation'} aria-expanded={menu}>{menu?<X size={21}/>:<Menu size={21}/>}</button><Link className="brand" to="/home"><img src={mark} alt=""/><span>epsm studio</span></Link><div className="header-context">{project?<><span className="header-divider"/><Link to={`/projects/${project.id}`}>{project.name}</Link><span className="context-slash">/</span><span>{location.pathname.split('/')[3]?.replace(/^./,c=>c.toUpperCase())||'Overview'}</span></>:<><span className="header-divider"/><span>Research workspace</span></>}</div><div className="header-actions"><label className="project-switcher"><span className="visually-hidden">Switch project</span><select value={project?.id||''} onChange={e=>e.target.value&&navigate(`/projects/${e.target.value}`)}><option value="">Open a project</option>{projects.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select></label><Link className="pc-button header-new" to="/projects/new"><Plus size={15}/>New project</Link><div className="user-menu"><button ref={userButton} className="user-button" onClick={()=>setUserMenu(!userMenu)} aria-expanded={userMenu} aria-label="User menu"><span className="avatar">{account.initials}</span><span className="user-name">{account.name.split(' ')[0]}</span><ChevronDown size={14}/></button>{userMenu&&<div className="user-popover"><p>{account.name}<small>Demonstration account</small></p><Link to="/settings" onClick={()=>setUserMenu(false)}><Settings size={16}/>User settings</Link><button onClick={()=>void signOut().then(()=>navigate('/login'))}><LogOut size={16}/>Sign out</button></div>}</div></div></header>
+ <aside ref={sidebar} id="global-sidebar" className={`app-sidebar ${menu?'is-open':''}`}><nav aria-label="Global navigation">{links.map(({to,name,Icon})=><NavLink to={to} key={to} className={({isActive})=>isActive?'nav-item active':'nav-item'}><Icon size={19} strokeWidth={1.6}/><span>{name}</span></NavLink>)}</nav><div className="sidebar-bottom"><div className="sidebar-note"><span className="status-dot"/><span>Your browser workspace<small>Saved locally · demo data</small></span></div><Link className="nav-item" to="/settings"><Settings size={18}/>User settings</Link><a className="nav-item" href="https://github.com/SB-Chalmers/epsm" target="_blank" rel="noreferrer"><Info size={18}/>Platform guide</a></div></aside>{menu&&<button className="sidebar-backdrop" aria-label="Close navigation" onClick={()=>setMenu(false)}/>}
+ <main id="main-content" className="app-main" tabIndex={-1}>{error&&<Notice tone="danger">{error}</Notice>}<Outlet/></main><footer className="prototype-footer"><span><span className="prototype-indicator"/>Prototype · illustrative data · saved in this browser</span><span>EPSM / Chalmers</span></footer></div>;
 }
-
-export default App;
+function ProjectWorkspace() {
+ const {id}=useParams();const {account,refresh}=useStudio();const location=useLocation();const [project,setProject]=useState<Project|null>(null);const [error,setError]=useState('');
+ const reload=useCallback(async()=>{if(!id)return;try{const p=await studioClient.getProject(id);setProject(p);setError('');await refresh();}catch(e){setProject(null);setError(e instanceof Error?e.message:'Project could not be opened.');}},[id,refresh]);
+ useEffect(()=>{setProject(null);setError('');void reload();},[reload,account?.id]);
+ const pending=project?.baselines.some(r=>r.status==='queued'||r.status==='running')||project?.studies.some(s=>s.status==='queued'||s.status==='running');
+ useEffect(()=>{if(!pending)return;const timer=setInterval(()=>void reload(),700);return()=>clearInterval(timer);},[pending,reload]);
+ if(error)return <EmptyState title="Project unavailable" action={<Link to="/projects" className="pc-button">Return to your projects</Link>}>{error}</EmptyState>;
+ if(!project)return <p role="status">Opening project…</p>;
+ const base=`/projects/${project.id}`;const section=location.pathname.slice(base.length).split('/')[1]||'';
+ const shared={project,onRefresh:reload};
+ return <><nav className="project-tabs" aria-label="Project navigation">{[['','Overview'],['buildings','Buildings'],['baseline','Baseline'],['studies','Studies'],['results','Results']].map(([path,name])=><Link key={path} to={`${base}${path?'/'+path:''}`} aria-current={section===path?'page':undefined}>{name}{path==='studies'&&<span>{project.studies.length}</span>}</Link>)}<span className="project-revision"><Building2 size={13}/>Revision {project.revision}</span></nav>{section==='buildings'?<BuildingsPage {...shared}/>:section==='baseline'?<BaselinePage {...shared}/>:section==='studies'?<StudiesPage {...shared}/>:section==='results'?<ResultsPage {...shared}/>:section===''?<ProjectOverview {...shared}/>:<EmptyState title="Page not found" action={<Link to={base}>Project overview</Link>}/>}</>;
+}
+export default function App(){return <BrowserRouter><StudioProvider><Suspense fallback={<div className="loading-screen" role="status">Opening page…</div>}><Routes><Route path="/login" element={<LoginPage/>}/><Route element={<Layout/>}><Route path="/home" element={<HomePage/>}/><Route path="/projects" element={<ProjectsPage/>}/><Route path="/projects/new" element={<NewProjectPage/>}/><Route path="/projects/:id/*" element={<ProjectWorkspace/>}/><Route path="/materials" element={<MaterialsPage/>}/><Route path="/about" element={<AboutPage/>}/><Route path="/settings" element={<SettingsPage/>}/></Route><Route path="/" element={<Navigate to="/home" replace/>}/><Route path="*" element={<Navigate to="/home" replace/>}/></Routes></Suspense></StudioProvider></BrowserRouter>;}

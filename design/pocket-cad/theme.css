@@ -1,0 +1,135 @@
+/* SPDX-License-Identifier: MIT
+ * Opt-in styles. Nothing here changes Studio until a consumer imports this file
+ * and adds .epsm-pocket-cad. tokens.css must be loaded first.
+ */
+@font-face {
+  font-family: Inter;
+  src: url("fonts/InterVariable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: Inter;
+  src: url("fonts/InterVariable-Italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("fonts/IBMPlexMono-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("fonts/IBMPlexMono-Medium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+.epsm-pocket-cad {
+  font-family: var(--epsm-font-sans);
+  font-size: var(--epsm-text-base);
+  line-height: var(--epsm-line-height);
+  font-optical-sizing: auto;
+  color: var(--epsm-color-text);
+  background: var(--epsm-color-background);
+  accent-color: var(--epsm-color-selection-text);
+  color-scheme: light;
+}
+.epsm-pocket-cad *, .epsm-pocket-cad *::before, .epsm-pocket-cad *::after { box-sizing: border-box; }
+.epsm-pocket-cad :where(h1,h2,h3,p,ul,ol,figure) { margin: 0; }
+.epsm-pocket-cad :where(h1,h2,h3), .epsm-pocket-cad .specimen-icon { overflow-wrap: anywhere; }
+.epsm-pocket-cad h1 { font-size: var(--epsm-text-2xl); line-height: 1.2; letter-spacing: -.025em; font-weight: 650; }
+.epsm-pocket-cad h2 { font-size: var(--epsm-text-xl); line-height: 1.3; letter-spacing: -.02em; font-weight: 600; }
+.epsm-pocket-cad h3 { font-size: var(--epsm-text-lg); line-height: 1.35; font-weight: 600; }
+.epsm-pocket-cad a { color: var(--epsm-color-selection-text); text-underline-offset: .2em; }
+.epsm-pocket-cad :where(button,input,select,textarea) { font: inherit; }
+.epsm-pocket-cad :where(button,a,input,select,textarea,summary):focus-visible {
+  outline: 2px solid var(--epsm-color-focus);
+  outline-offset: 3px;
+}
+.epsm-pocket-cad :where(code,pre,kbd,.pc-code) { font-family: var(--epsm-font-mono); font-size: var(--epsm-text-sm); }
+.epsm-pocket-cad pre { margin: 0; overflow-x: auto; padding: var(--epsm-space-4); background: var(--epsm-color-surface); border: 1px solid var(--epsm-color-divider); border-radius: var(--epsm-radius); }
+.epsm-pocket-cad .pc-muted, .epsm-pocket-cad .pc-help { color: var(--epsm-color-muted); }
+.epsm-pocket-cad .pc-help { font-size: var(--epsm-text-sm); }
+.epsm-pocket-cad .pc-stack { display: flex; flex-direction: column; gap: var(--epsm-space-4); min-width: 0; }
+.epsm-pocket-cad .pc-row { display: flex; align-items: center; flex-wrap: wrap; gap: var(--epsm-space-3); }
+.epsm-pocket-cad .pc-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,250px),1fr)); gap: var(--epsm-space-6); }
+.epsm-pocket-cad .pc-icon { width: var(--epsm-icon-size); height: var(--epsm-icon-size); flex: 0 0 auto; image-rendering: pixelated; object-fit: contain; }
+.epsm-pocket-cad .pc-icon--large { width: 64px; height: 64px; }
+.epsm-pocket-cad .pc-button {
+  min-height: var(--epsm-control-height);
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--epsm-space-2);
+  padding: var(--epsm-space-2) var(--epsm-space-4);
+  border: 1px solid var(--epsm-color-border); border-radius: var(--epsm-radius);
+  background: var(--epsm-color-surface); color: var(--epsm-color-text);
+  font-size: var(--epsm-text-sm); font-weight: 550; line-height: 1.3;
+  text-decoration: none; cursor: pointer;
+}
+.epsm-pocket-cad .pc-button:hover { border-color: var(--epsm-color-text); }
+.epsm-pocket-cad .pc-button--primary { background: var(--epsm-color-text); border-color: var(--epsm-color-text); color: var(--epsm-color-surface); }
+.epsm-pocket-cad .pc-button--primary:hover { background: #111616; }
+.epsm-pocket-cad .pc-button--quiet { background: transparent; border-color: transparent; }
+.epsm-pocket-cad .pc-button[disabled], .epsm-pocket-cad .pc-button[aria-disabled="true"] {
+  background: #EEF0EB; color: var(--epsm-color-muted); border-color: var(--epsm-color-divider); cursor: not-allowed;
+}
+.epsm-pocket-cad .pc-touch { min-height: var(--epsm-touch-target); min-width: var(--epsm-touch-target); }
+.epsm-pocket-cad .pc-field { display: flex; flex-direction: column; gap: var(--epsm-space-2); font-size: var(--epsm-text-sm); }
+.epsm-pocket-cad .pc-field > label { font-weight: 550; }
+.epsm-pocket-cad .pc-input {
+  width: 100%; min-height: var(--epsm-control-height); padding: var(--epsm-space-2) var(--epsm-space-3);
+  color: var(--epsm-color-text); background: var(--epsm-color-surface); border: 1px solid var(--epsm-color-border);
+  border-radius: var(--epsm-radius); font-size: var(--epsm-text-base);
+}
+.epsm-pocket-cad .pc-input::placeholder { color: var(--epsm-color-muted); }
+.epsm-pocket-cad .pc-input[aria-invalid="true"] { border: 2px solid var(--epsm-color-danger); }
+.epsm-pocket-cad .pc-error { color: var(--epsm-color-danger); font-size: var(--epsm-text-sm); }
+.epsm-pocket-cad .pc-tabs { display: flex; gap: var(--epsm-space-2); flex-wrap: wrap; border-bottom: 1px solid var(--epsm-color-divider); }
+.epsm-pocket-cad .pc-tab { display: inline-flex; gap: var(--epsm-space-2); align-items: center; min-height: 44px; padding: var(--epsm-space-3); color: var(--epsm-color-muted); border: 0; border-bottom: 2px solid transparent; background: transparent; font-size: var(--epsm-text-sm); text-decoration: none; cursor: pointer; }
+.epsm-pocket-cad .pc-tab[aria-current="page"], .epsm-pocket-cad .pc-tab[aria-selected="true"] { color: var(--epsm-color-selection-text); border-bottom-color: var(--epsm-color-selection); font-weight: 550; }
+.epsm-pocket-cad .pc-table-wrap { max-width: 100%; overflow-x: auto; }
+.epsm-pocket-cad .pc-table { border-collapse: collapse; width: 100%; font-size: var(--epsm-text-sm); }
+.epsm-pocket-cad .pc-table caption { text-align: left; padding-bottom: var(--epsm-space-3); font-weight: 600; }
+.epsm-pocket-cad .pc-table :where(th,td) { text-align: left; vertical-align: top; padding: var(--epsm-space-3); border-bottom: 1px solid var(--epsm-color-divider); }
+.epsm-pocket-cad .pc-table th { font-weight: 550; color: var(--epsm-color-muted); }
+.epsm-pocket-cad .pc-table tr[data-selected="true"], .epsm-pocket-cad .pc-table tr[aria-selected="true"] { background: var(--epsm-color-selection-surface); }
+.epsm-pocket-cad .pc-number { text-align: right !important; font-variant-numeric: tabular-nums lining-nums; }
+.epsm-pocket-cad .pc-metrics { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: var(--epsm-space-6); }
+.epsm-pocket-cad .pc-metrics > div { padding-left: var(--epsm-space-4); border-left: 1px solid var(--epsm-color-divider); }
+.epsm-pocket-cad .pc-metrics dt { color: var(--epsm-color-muted); font-size: var(--epsm-text-sm); }
+.epsm-pocket-cad .pc-metrics dd { margin: var(--epsm-space-1) 0 0; font-size: var(--epsm-text-xl); font-weight: 600; font-variant-numeric: tabular-nums lining-nums; }
+.epsm-pocket-cad .pc-badge { display: inline-flex; gap: var(--epsm-space-1); align-items: center; padding: 2px 6px; border: 1px solid var(--epsm-color-border); border-radius: var(--epsm-radius); font-size: var(--epsm-text-xs); color: var(--epsm-color-muted); }
+.epsm-pocket-cad .pc-notice { border-left: 3px solid currentColor; padding: var(--epsm-space-3) var(--epsm-space-4); display: flex; flex-wrap: wrap; gap: var(--epsm-space-3); align-items: baseline; font-size: var(--epsm-text-sm); }
+.epsm-pocket-cad .pc-status--success { color: var(--epsm-color-success); }
+.epsm-pocket-cad .pc-status--warning { color: var(--epsm-color-warning); }
+.epsm-pocket-cad .pc-status--danger { color: var(--epsm-color-danger); }
+.epsm-pocket-cad .pc-status--info { color: var(--epsm-color-info); }
+.epsm-pocket-cad .pc-panel { padding-top: var(--epsm-space-6); border-top: 1px solid var(--epsm-color-divider); min-width: 0; }
+.epsm-pocket-cad .pc-shell { display: grid; grid-template-columns: 176px minmax(0,1fr); max-width: 1600px; margin: auto; }
+.epsm-pocket-cad .pc-header { grid-column: 1 / -1; display: flex; gap: var(--epsm-space-4); flex-wrap: wrap; align-items: center; padding: var(--epsm-space-4) var(--epsm-space-6); border-bottom: 1px solid var(--epsm-color-divider); }
+.epsm-pocket-cad .pc-sidebar { padding: var(--epsm-space-6) var(--epsm-space-4); border-right: 1px solid var(--epsm-color-divider); }
+.epsm-pocket-cad .pc-sidebar a { display: block; padding: var(--epsm-space-2); color: var(--epsm-color-muted); font-size: var(--epsm-text-sm); text-decoration: none; border-radius: var(--epsm-radius); }
+.epsm-pocket-cad .pc-sidebar a:hover { color: var(--epsm-color-text); background: #EEF0EB; }
+.epsm-pocket-cad .pc-main { padding: var(--epsm-space-8); min-width: 0; }
+.epsm-pocket-cad .pc-map-sample { min-height: 220px; background: #F3F4EF; border: 1px solid var(--epsm-color-border); position: relative; }
+.epsm-pocket-cad .pc-map-context { position: absolute; inset: 24px 15%; border: 2px dashed var(--epsm-color-text); background: rgb(39 43 43 / 4%); }
+.epsm-pocket-cad .pc-map-target { position: absolute; inset: 55px 30%; border: 2px solid var(--epsm-color-text); background: rgb(39 43 43 / 8%); }
+.epsm-pocket-cad .pc-map-target[data-selected="true"] { border: 3px solid var(--epsm-color-selection); box-shadow: 0 0 0 2px white; background: rgb(233 84 63 / 10%); }
+.epsm-pocket-cad .pc-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.epsm-pocket-cad .pc-skip-link { position: absolute; left: -10000px; top: 8px; }
+.epsm-pocket-cad .pc-skip-link:focus { left: 8px; padding: 8px 16px; background: white; z-index: 10; }
+@media (max-width: 760px) {
+  .epsm-pocket-cad .pc-shell { grid-template-columns: minmax(0,1fr); }
+  .epsm-pocket-cad .pc-sidebar { border-right: 0; border-bottom: 1px solid var(--epsm-color-divider); padding: var(--epsm-space-3); display: flex; flex-wrap: wrap; gap: var(--epsm-space-1); }
+  .epsm-pocket-cad .pc-main { padding: var(--epsm-space-6) var(--epsm-space-4); }
+  .epsm-pocket-cad .pc-button { min-height: var(--epsm-touch-target); }
+}
+@media (forced-colors: active) {
+  .epsm-pocket-cad :where(.pc-button,.pc-input,.pc-badge) { border-color: ButtonText; }
+  .epsm-pocket-cad .pc-tab[aria-current="page"] { border-bottom-color: LinkText; }
+  .epsm-pocket-cad .pc-table tr[data-selected="true"], .epsm-pocket-cad .pc-table tr[aria-selected="true"] { outline: 2px solid Highlight; }
+}

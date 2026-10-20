@@ -1,10 +1,11 @@
 # Proposed cache, persistence and recovery policy
 
-**Status: design policy only, 20 October 2026.** No browser/server cache,
-autosave, offline storage, persistence API or computation reuse is implemented by
-the Studio scaffold. Existing library caches are described separately from the
-application policy below. Proposed limits need measurement and a check at their
-implementation milestone.
+**Status: production design policy, 20 October 2026.** The
+[frontend prototype](frontend-prototype.md) implements account-scoped IndexedDB
+recovery and illustrative baseline reuse. Server persistence, authenticated caches,
+scientific cache identities and production recovery remain future work. Existing
+library caches are described separately from the application policy below.
+Proposed limits need measurement and a check at their implementation milestone.
 
 A cache is a disposable copy that can be rebuilt. A saved draft, frozen study,
 source evidence snapshot or retained result is durable evidence and must not be

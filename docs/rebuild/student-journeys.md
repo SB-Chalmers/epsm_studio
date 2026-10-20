@@ -1,9 +1,11 @@
 # Student journeys
 
-**Status: proposed product behaviour, 20 October 2026.** These journeys are
-requirements for later increments. The scaffold does not implement their forms,
-storage, calculations or analyses. Refer to the [milestones](plan.md) for gates and
-the [architecture](architecture.md) for current package support.
+**Status: production journey requirements, 20 October 2026.** The
+[frontend prototype](frontend-prototype.md) now implements a reviewable subset
+with browser storage and illustrative evaluations. Scientific calculations,
+server ownership and the broader experiment methods below remain later gates.
+Refer to the [milestones](plan.md) and [architecture](architecture.md) for package
+support and production requirements.
 
 Studio should help a student understand what they selected, what they assumed,
 what was computed and what can be concluded. It should expose uncertainty and
