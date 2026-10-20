@@ -156,8 +156,9 @@ test('draw a custom building, run a frozen baseline, compose and run a robust st
   await page.getByRole('tab', { name: 'Hourly sample', exact: true }).click();
   await expect(page.getByText('168 illustrative hourly samples.', { exact: false })).toBeVisible();
   const scenario = page.getByLabel('Active scenario', { exact: true });
-  await scenario.selectOption({ index: 1 });
-  const scenarioValue = await scenario.inputValue();
+  const [scenarioValue] = await scenario.selectOption({ index: 1 });
+  await expect(scenario).toHaveValue(scenarioValue);
+  await expect(page).toHaveURL(url => url.searchParams.get('scenario') === scenarioValue);
   await page.reload();
   await expect(page.getByLabel('Active scenario', { exact: true })).toHaveValue(scenarioValue);
   await page.getByLabel('Export scope').selectOption('all');

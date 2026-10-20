@@ -78,6 +78,7 @@ export function BaselinePage({ project, onRefresh }: ProjectPageProps) {
     {message && <p role="status" className="pc-notice pc-status--success">{message}</p>}
     <section className="pc-panel pc-stack" aria-labelledby="baseline-config-title">
       <div><h3 id="baseline-config-title">Run configuration</h3><p className="pc-help">{selectedBuildings(project).length} selected buildings · project revision {project.revision}. Results use fixtures; no engine is launched.</p></div>
+      <fieldset className="study-fieldset pc-stack" aria-label="Baseline configuration" disabled={busy || loadedProject !== project.id}>
       <div className="study-form-grid">
         <div className="pc-field"><label htmlFor="baseline-engine">Simulation engine</label><select id="baseline-engine" className="pc-input" value={engine} onChange={event => { setEngine(event.target.value as Engine); setAcknowledged(false); }}><option value="rc">RC · fast baseline</option><option value="energyplus">EnergyPlus · detailed comparison</option></select></div>
         <div className="pc-field"><label htmlFor="baseline-weather">Reference weather</label><select id="baseline-weather" className="pc-input" value={weatherId} onChange={event => setWeatherId(event.target.value)}>{weather.map(choice => <option value={choice.id} key={choice.id}>{choice.name}{choice.kind === 'future' ? ' · illustrative future' : ''}</option>)}</select></div>
@@ -88,6 +89,7 @@ export function BaselinePage({ project, onRefresh }: ProjectPageProps) {
       {readiness.length > 0 && <div className="pc-stack"><p className="study-selection-title">Before running</p><ul className="study-list-reset pc-help">{readiness.map((reason, index) => <li key={`${reason}-${index}`}>{reason}</li>)}</ul><Link to={`/projects/${project.id}/buildings`}>Review building inputs →</Link></div>}
       <details><summary className="pc-help">Demo controls</summary><label className="study-check"><input type="checkbox" checked={demoFailure} onChange={event => setDemoFailure(event.target.checked)} /> Include an illustrative failed case to explore recovery.</label></details>
       <div className="pc-row"><button className="pc-button pc-button--primary" disabled={busy || readiness.length > 0 || pending} onClick={() => void start()}>{busy ? 'Submitting…' : pending ? 'Baseline in progress' : 'Run baseline'}</button><span className="pc-help">Inputs are frozen at submission. Later edits create a new revision.</span></div>
+      </fieldset>
     </section>
     <section className="pc-panel pc-stack" aria-labelledby="baseline-history-title">
       <h3 id="baseline-history-title">Reference runs <span className="pc-badge">{runs.length}</span></h3>

@@ -19,6 +19,19 @@ beforeEach(() => {
 });
 afterEach(cleanup);
 describe('recoverable baseline configuration', () => {
+  it('keeps configuration controls disabled until asynchronous recovery completes', async () => {
+    let finishRecovery!: (settings: { defaultEngine: string; defaultWeather: string; assessmentPeriod: number }) => void;
+    api.getSettings.mockReturnValueOnce(new Promise(resolve => { finishRecovery = resolve; }));
+    render(page());
+    expect(screen.getByLabelText('Simulation engine')).toBeDisabled();
+    expect(screen.getByLabelText('Reference weather')).toBeDisabled();
+    expect(screen.getByLabelText('Carbon assessment period · years')).toBeDisabled();
+    finishRecovery({ defaultEngine: 'energyplus', defaultWeather: 'amy', assessmentPeriod: 42 });
+    await waitFor(() => expect(screen.getByLabelText('Simulation engine')).toBeEnabled());
+    expect(screen.getByLabelText('Simulation engine')).toHaveValue('energyplus');
+    expect(screen.getByLabelText('Reference weather')).toHaveValue('amy');
+    expect(screen.getByLabelText('Carbon assessment period · years')).toHaveValue(42);
+  });
   it('recovers account draft settings and persists edits without starting a run', async () => {
     drafts.set('baseline:project-1', config);
     const mounted = render(page());
