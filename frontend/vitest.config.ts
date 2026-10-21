@@ -1,11 +1,4 @@
+// SPDX-License-Identifier: MIT
 import { defineConfig } from 'vitest/config';
-
-export default defineConfig({
-  test: {
-    environment: 'jsdom',
-    globals: true,
-    setupFiles: ['./src/setupTests.ts'],
-    // Increase timeout slightly for UI tests that may render components
-    testTimeout: 10000,
-  },
-});
+import react from '@vitejs/plugin-react';
+export default defineConfig({plugins:[react()],test:{environment:'jsdom',include:['src/**/*.test.{ts,tsx}'],setupFiles:['./src/test/setup.ts'],restoreMocks:true}});

@@ -1,0 +1,37 @@
+name: Development checks
+'on':
+  pull_request:
+    branches:
+    - dev
+    - main
+  workflow_dispatch: null
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  ci:
+    name: ci
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: npm
+        cache-dependency-path: frontend/package-lock.json
+    - name: Test and build the frontend
+      working-directory: frontend
+      run: |
+        npm ci
+        npm test
+        npm run build
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+    - name: Check design assets
+      run: |
+        python design/pocket-cad/scripts/check_assets.py
+        python design/pocket-cad/scripts/sync_readme_assets.py --repos epsm_studio --check

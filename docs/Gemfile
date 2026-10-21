@@ -1,5 +1,0 @@
-source 'https://rubygems.org'
-
-gem 'jekyll', '~> 4.4'
-# Use latest compatible minima; avoid pinning to a specific minor version to prevent resolution failures.
-gem 'minima'

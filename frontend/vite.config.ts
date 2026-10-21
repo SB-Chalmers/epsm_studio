@@ -1,68 +1,26 @@
+// SPDX-License-Identifier: MIT
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-
-// https://vitejs.dev/config/
-const backendHost = process.env.BACKEND_HOST || 'http://backend:8000';
+import { fileURLToPath } from 'node:url';
+import { readFileSync } from 'node:fs';
 
 export default defineConfig({
-  plugins: [react()],
-  optimizeDeps: {
-    include: ['driver.js'],
-  },
-  build: {
-    // Ensure assets are copied properly
-    assetsDir: 'assets',
-    copyPublicDir: true,
-  },
-  publicDir: 'public',
-  server: {
-    host: true,
-    watch: {
-      usePolling: true,
+  plugins: [react(), {
+    name: 'canonical-distribution-notices',
+    generateBundle() {
+      const notices = {
+        'STUDIO-LICENSE.txt': '../LICENSE.md',
+        'INTER-OFL.txt': '../design/pocket-cad/fonts/INTER-OFL.txt',
+        'IBM-PLEX-OFL.txt': '../design/pocket-cad/fonts/IBM-PLEX-OFL.txt',
+        'POCKET-CAD-ICONS-LICENSE.txt': '../design/pocket-cad/icons/LICENSE',
+        'FONT-PROVENANCE.json': '../design/pocket-cad/fonts/manifest.json',
+        'VIEWER-LICENSE.txt': './node_modules/epsm_viewer/LICENSE',
+        'VIEWER-NOTICES.md': './node_modules/epsm_viewer/THIRD_PARTY_NOTICES.md',
+        'THREE-LICENSE.txt': './node_modules/epsm_viewer/dist/standalone/THREE_LICENSE',
+        'VIEWER-PROVENANCE.json': './vendor/epsm_viewer-0.1.0.provenance.json',
+      };
+      for (const [name, source] of Object.entries(notices)) this.emitFile({ type: 'asset', fileName: `licenses/${name}`, source: readFileSync(new URL(source, import.meta.url), 'utf8') });
     },
-    proxy: {
-      '/api': {
-        target: backendHost,
-        changeOrigin: true,
-        secure: false,
-        xfwd: true,
-        configure: (proxy, _options) => {
-          proxy.on('error', (err, _req, _res) => {
-            console.log('proxy error', err);
-          });
-          proxy.on('proxyReq', (_proxyReq, req, _res) => {
-            console.log('Proxying request:', req.method, req.url, 'to', backendHost);
-          });
-          proxy.on('proxyRes', (proxyRes, req, _res) => {
-            console.log('Received response:', proxyRes.statusCode, req.url);
-          });
-        },
-      },
-      '/admin': {
-        target: backendHost,
-        changeOrigin: true,
-        secure: false,
-        xfwd: true,
-      },
-      '/static': {
-        target: backendHost,
-        changeOrigin: true,
-        secure: false,
-      },
-      '/ws': {
-        target: backendHost.replace('http', 'ws'),
-        ws: true,
-        changeOrigin: true,
-        secure: false,
-        configure: (proxy, _options) => {
-          proxy.on('error', (err, _req, _res) => {
-            console.log('WebSocket proxy error', err);
-          });
-          proxy.on('proxyReqWs', (_proxyReq, req, _socket, _options, _head) => {
-            console.log('Proxying WebSocket:', req.url, 'to', backendHost);
-          });
-        },
-      },
-    },
-  },
+  }],
+  server: { fs: { allow: [fileURLToPath(new URL('..', import.meta.url))] } },
 });

@@ -1,13 +1,15 @@
-import React, { StrictMode } from 'react';
+// SPDX-License-Identifier: MIT
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import './index.css';
+import '../../design/pocket-cad/tokens.css';
+import '../../design/pocket-cad/theme.css';
+import './style.css';
 
-const rootElement = document.getElementById('root');
-if (!rootElement) throw new Error('Failed to find the root element');
-
-createRoot(rootElement).render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <div className="epsm-pocket-cad">
     <App />
-  </StrictMode>
+      </div>
+  </StrictMode>,
 );
