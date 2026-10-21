@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pocket CAD · EPSM design specimen</title>
+  <link rel="icon" href="icons/png/32/epsm.png" type="image/png">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    body { margin: 0; }
+    .epsm-pocket-cad .specimen-section { scroll-margin-top: 24px; margin-bottom: 48px; }
+    .epsm-pocket-cad .specimen-section > :first-child { margin-bottom: 16px; }
+    .epsm-pocket-cad .specimen-intro { max-width: 64ch; }
+    .epsm-pocket-cad .specimen-title { font-size: var(--epsm-text-3xl); }
+    .epsm-pocket-cad .specimen-colours { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,145px),1fr)); gap: 16px; overflow-wrap: anywhere; }
+    .epsm-pocket-cad .specimen-swatch { height: 64px; border: 1px solid #858D86; border-radius: 4px; margin-bottom: 8px; }
+    .epsm-pocket-cad .specimen-icon-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 24px; }
+    .epsm-pocket-cad .specimen-icon { display: flex; flex-direction: column; gap: 8px; padding-top: 16px; border-top: 1px solid #DFE2DC; }
+    .epsm-pocket-cad .specimen-icon img { image-rendering: pixelated; width: 64px; height: 64px; }
+    .epsm-pocket-cad .specimen-icon small { color: var(--epsm-color-muted); }
+    .epsm-pocket-cad .specimen-dark { background: #202526; color: #F1E9D6; padding: 16px; border-radius: 4px; }
+    .epsm-pocket-cad .specimen-dark img { width: 32px; height: 32px; image-rendering: pixelated; }
+    .epsm-pocket-cad .specimen-images { display: grid; gap: 24px; }
+    .epsm-pocket-cad .specimen-images img { width: 100%; height: auto; border: 1px solid var(--epsm-color-divider); }
+    .epsm-pocket-cad .specimen-images figcaption { margin-top: 8px; color: var(--epsm-color-muted); font-size: 14px; }
+    .epsm-pocket-cad .specimen-map-label { position: absolute; bottom: 8px; left: 12px; font-size: 14px; }
+    .epsm-pocket-cad .specimen-bar { height: 12px; background: #777D78; margin-top: 6px; }
+    .epsm-pocket-cad .specimen-bar[data-active="true"] { background: var(--epsm-color-selection); }
+    .epsm-pocket-cad .specimen-option { display: flex; align-items: center; gap: 8px; }
+    .epsm-pocket-cad .specimen-output { min-height: 24px; }
+    @media (max-width: 760px) { .epsm-pocket-cad .specimen-title { font-size: var(--epsm-text-2xl); } }
+  </style>
+  <script src="preview-data.js" defer></script>
+  <script src="preview.js" defer></script>
+</head>
+<body class="epsm-pocket-cad">
+<a class="pc-skip-link" href="#main">Skip to specimen</a>
+<div class="pc-shell">
+  <header class="pc-header">
+    <img class="pc-icon" src="icons/png/32/epsm.png" width="32" height="32" alt="">
+    <strong>Pocket CAD</strong><span class="pc-muted">EPSM design specimen · v1.0.0</span>
+    <a href="../../docs/design/README.md">Read the manual</a>
+    <label class="pc-row pc-help" for="text-size">Text size
+      <select class="pc-input" id="text-size" style="width:auto"><option value="100">100%</option><option value="200">200%</option></select>
+    </label>
+  </header>
+  <nav class="pc-sidebar" aria-label="Specimen sections">
+    <a href="#identity">Identity</a><a href="#colour">Colour</a><a href="#type">Typography</a>
+    <a href="#controls">Controls</a><a href="#icons">Icon pack</a><a href="#data">Data</a>
+    <a href="#maps">Map overlays</a><a href="#references">Reference screens</a>
+  </nav>
+  <main id="main" class="pc-main" tabindex="-1">
+    <section id="identity" class="specimen-section pc-stack">
+      <h1 class="specimen-title">Modern workspace. Pixel character.</h1>
+      <p class="specimen-intro">A readable light interface with a small, precise building at its centre. These working HTML examples use the actual local fonts, generated tokens and opt-in stylesheet. They do not call a server or run a simulation.</p>
+      <div class="pc-row">
+        <img class="pc-icon pc-icon--large" src="icons/png/64/epsm.png" width="64" height="64" alt="EPSM room identity">
+        <p>Near-white surfaces. Clear type. One active item in vermilion.</p>
+      </div>
+    </section>
+    <section id="colour" class="specimen-section pc-stack pc-panel">
+      <h2>Colour with a job</h2>
+      <div id="ui-colours" class="specimen-colours"></div>
+      <p class="pc-help">Bright vermilion marks a selection. Dark red is used for readable small text. Light dividers separate groups; stronger borders identify controls.</p>
+      <div class="pc-grid">
+        <p class="pc-notice pc-status--success"><strong>Passed</strong> Geometry checks complete.</p>
+        <p class="pc-notice pc-status--warning"><strong>Missing input</strong> Choose weather before running.</p>
+        <p class="pc-notice pc-status--danger"><strong>Failed</strong> Inspect the retained run log.</p>
+        <p class="pc-notice pc-status--info"><strong>Information</strong> Results describe the saved inputs.</p>
+      </div>
+    </section>
+    <section id="type" class="specimen-section pc-stack pc-panel">
+      <h2>Typography that stays readable</h2>
+      <p>Inter for prose, headings and numeric tables. <em>True italics are bundled.</em> IBM Plex Mono for code and technical identifiers.</p>
+      <p>ÅÄÖ åäö · m² · m³ · CO₂ · μ · µ · °C</p>
+      <p class="pc-code">building_014 · epsm.scene/1 · ÅÄÖ åäö m² m³ CO₂ μ µ °C</p>
+      <p class="pc-help">Greek μ falls back from Plex Mono to bundled Inter. Preserve the actual unit symbol.</p>
+      <pre><code>&lt;link rel="stylesheet" href="tokens.css"&gt;
+&lt;link rel="stylesheet" href="theme.css"&gt;
+&lt;main class="epsm-pocket-cad"&gt;…&lt;/main&gt;</code></pre>
+    </section>
+    <section id="controls" class="specimen-section pc-stack pc-panel">
+      <h2>Controls and state</h2>
+      <p>Try the form and view selector with a keyboard. The disabled action explains its missing prerequisite.</p>
+      <form id="example-form" class="pc-grid" novalidate>
+        <div class="pc-field">
+          <label for="study-name">Study name (required)</label>
+          <input class="pc-input" id="study-name" name="study-name" required value="Campus study" aria-describedby="study-help study-error">
+          <p id="study-help" class="pc-help">An example field; this specimen never saves a project.</p>
+          <p id="study-error" class="pc-error" hidden>Error: Enter a study name.</p>
+        </div>
+        <div class="pc-stack">
+          <div class="pc-row">
+            <button class="pc-button pc-button--primary" type="submit">Validate example</button>
+            <button class="pc-button" id="reset-example" type="button">Reset</button>
+            <button class="pc-button" type="button" disabled aria-describedby="run-help">Run baseline</button>
+          </div>
+          <p id="run-help" class="pc-help">Run unavailable: weather has not been selected.</p>
+          <p id="form-result" class="specimen-output pc-help" role="status"></p>
+        </div>
+      </form>
+      <div class="pc-tabs" role="tablist" aria-label="Example view">
+        <button class="pc-tab" id="tab-model" role="tab" aria-selected="true" aria-controls="panel-model" tabindex="0" type="button">Model</button>
+        <button class="pc-tab" id="tab-evidence" role="tab" aria-selected="false" aria-controls="panel-evidence" tabindex="-1" type="button">Evidence</button>
+      </div>
+      <div id="panel-model" role="tabpanel" aria-labelledby="tab-model" tabindex="0"><p>The current model keeps its physical assignments and explicit assumptions.</p></div>
+      <div id="panel-evidence" role="tabpanel" aria-labelledby="tab-evidence" tabindex="0" hidden><p>Source observations remain distinct from derived values and assumptions.</p></div>
+      <details><summary>Loading, empty and failure messages</summary><div class="pc-stack" style="padding-top:16px">
+        <p class="pc-notice">Loading records… Progress is shown only when known.</p>
+        <p class="pc-notice">No materials match these filters. Change or clear the filters.</p>
+        <p class="pc-notice pc-status--danger">Run failed. Successful outputs and the failed attempt remain inspectable.</p>
+      </div></details>
+    </section>
+    <section id="icons" class="specimen-section pc-stack pc-panel">
+      <h2>Twelve roles. One family.</h2>
+      <p>Native 32-pixel grids, enlarged only by integer factors. Each icon names a responsibility.</p>
+      <div id="icon-grid" class="specimen-icon-grid"></div>
+      <div class="specimen-dark pc-stack"><p>Dark-background README keylines · same artwork, no dark UI theme</p><div class="pc-row" id="dark-icon-row"></div></div>
+      <a href="icons/catalogue.html">Open the complete icon catalogue and downloads</a>
+    </section>
+    <section id="data" class="specimen-section pc-stack pc-panel">
+      <h2>Show the quantity and its basis</h2>
+      <p>Illustrative values below are taken from the supplied UI reference, not a new calculation.</p>
+      <dl class="pc-metrics"><div><dt>Total volume</dt><dd>3,241.37 m³</dd></div><div><dt>Total mass</dt><dd>5,163.67 tonnes</dd></div><div><dt>Materials</dt><dd>12</dd></div></dl>
+      <div class="pc-table-wrap"><table class="pc-table">
+        <caption>Example result selection · annual simulated energy</caption>
+        <thead><tr><th scope="col">Selection</th><th scope="col">Quantity</th><th scope="col" class="pc-number">Energy (kWh/m²)</th><th scope="col">Origin</th></tr></thead>
+        <tbody><tr id="heating-row"><td><label class="specimen-option"><input id="select-heating" type="checkbox" checked> Inspect</label></td><th scope="row">Heating</th><td class="pc-number">199.8</td><td>Simulated</td></tr>
+        <tr><td>—</td><th scope="row">Cooling</th><td class="pc-number">0.0</td><td>Simulated</td></tr></tbody>
+      </table></div>
+      <p class="pc-help" id="selection-description" role="status">Selected: Heating · 199.8 kWh/m².</p>
+      <p>Scientific provenance, execution state and physical fields keep their own labelled encodings. See the manual before applying an interface accent to a scientific plot.</p>
+    </section>
+    <section id="maps" class="specimen-section pc-stack pc-panel">
+      <h2>Map overlays without colour dependence</h2>
+      <p>This schematic demonstrates boundary styles, not a geographic basemap. No tiles or network requests are loaded.</p>
+      <div class="pc-row"><label class="specimen-option"><input id="map-selection" type="checkbox" checked> Select target boundary</label><span class="pc-help">Context stays dashed; the target keeps its role when selected.</span></div>
+      <div class="pc-map-sample" id="map-schematic" role="img" aria-label="Schematic: dashed context boundary surrounding a solid target boundary; selected target uses red and a white casing.">
+        <div class="pc-map-context"></div><div class="pc-map-target" id="map-target" data-selected="true"></div>
+        <p class="specimen-map-label">Dashed: Context · Solid: Target · Red + casing: Selected</p>
+      </div>
+      <p id="map-description" class="pc-help" role="status">Target selected. Context and target roles are stored separately from styling.</p>
+      <details><summary>Implementation prerequisite</summary><p>The legacy area editor, retained in Git history, inferred some roles from colours. Give the new adapter stable feature IDs and explicit roles before adopting these presets. Casing and invalid hatches need renderer adapters; raster roads and labels cannot be individually styled through CSS.</p></details>
+      <a href="maps.json">Inspect the versioned overlay presets</a>
+    </section>
+    <section id="references" class="specimen-section pc-stack pc-panel">
+      <h2>Three reviewed reference screens</h2>
+      <p>These are visual mockups. They do not imply that planned Studio features are implemented.</p>
+      <div class="specimen-images">
+        <figure><a href="../../docs/design/images/area-selection.png"><img src="../../docs/design/images/area-selection.png" alt="Area-selection concept with a dominant map and a right-hand inspector" loading="lazy"></a><figcaption>Area selection · context and targets stay distinct.</figcaption></figure>
+        <figure><a href="../../docs/design/images/material-stock.png"><img src="../../docs/design/images/material-stock.png" alt="Material-stock concept with a horizontal bar chart and selected-material details" loading="lazy"></a><figcaption>Material stock · one selection links the chart and inspector.</figcaption></figure>
+        <figure><a href="../../docs/design/images/simulation-results.png"><img src="../../docs/design/images/simulation-results.png" alt="Results concept with aligned metrics and named timeseries groups" loading="lazy"></a><figcaption>Simulation results · units, aggregation and coverage stay visible.</figcaption></figure>
+      </div>
+    </section>
+    <footer class="pc-help pc-panel">Pocket CAD 1.0.0 · EPSM-owned artwork and styles: MIT · Fonts: original OFL licenses in <a href="fonts/README.md">fonts/</a>.</footer>
+  </main>
+</div>
+</body>
+</html>
