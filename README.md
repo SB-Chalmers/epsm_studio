@@ -1,4 +1,24 @@
-# EPSM - Energy Performance Simulation Manager
+# EPSM Studio
+
+<!-- EPSM introduction: Pocket CAD -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/brand/epsm_studio-dark.png">
+  <img src="docs/assets/brand/epsm_studio.png" width="64" height="64" alt="EPSM Studio — building model workspace">
+</picture>
+
+Explore building models, set up simulations and inspect results in EPSM’s web application.
+
+[Explore the EPSM platform](https://github.com/SB-Chalmers/epsm/blob/main/docs/platform.md)
+
+[Visual design manual](docs/design/README.md)
+<!-- /EPSM introduction -->
+
+This branch adds the Pocket CAD visual design manual and reusable assets to the
+existing Studio application. It does not restyle the application. An unfinished
+[frontend rebuild](https://github.com/SB-Chalmers/epsm_studio/tree/codex/studio-rebuild)
+is developed separately; its illustrative authentication and calculations are not
+production services. The installation instructions below describe the existing
+application on this branch.
 
 [![Version](https://img.shields.io/badge/version-0.2.7-blue.svg)](https://github.com/snjsomnath/epsm/releases/tag/v0.2.7)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE.md)

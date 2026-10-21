@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "version": "1.0.0",
+  "units": "CSS pixels",
+  "context": {
+    "color": "#272B2B",
+    "weight": 2,
+    "opacity": 1,
+    "dashArray": "6 4",
+    "fillColor": "#272B2B",
+    "fillOpacity": 0.04
+  },
+  "target": {
+    "color": "#272B2B",
+    "weight": 2,
+    "opacity": 1,
+    "dashArray": null,
+    "fillColor": "#272B2B",
+    "fillOpacity": 0.08
+  },
+  "selected": {
+    "color": "#E9543F",
+    "weight": 3,
+    "fillColor": "#E9543F",
+    "fillOpacity": 0.1,
+    "casing": {
+      "color": "#FFFFFF",
+      "extraWeight": 4
+    }
+  },
+  "hover": {
+    "extraWeight": 1
+  },
+  "invalid": {
+    "color": "#A12622",
+    "pattern": "diagonal-hatch",
+    "labelRequired": true
+  },
+  "notes": [
+    "Apply a role first, then interaction state; retain the role dash pattern when selected.",
+    "Selected casing is a separate wider underlay; it is not a Leaflet PathOptions property.",
+    "Hover extraWeight adds to the current weight; it does not replace role properties.",
+    "Patterns require a renderer adapter; pair invalid geometry with a visible reason.",
+    "Store stable feature id, role, selected and validity independently of colour.",
+    "These are overlay presets, not a tile service, basemap licence or working map adapter."
+  ]
+}

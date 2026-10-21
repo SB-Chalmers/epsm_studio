@@ -1,0 +1,126 @@
+{
+  "name": "EPSM Pocket CAD self-hosted fonts",
+  "version": "1.0.0",
+  "hash_algorithm": "sha256",
+  "license": "SIL Open Font License 1.1",
+  "upstream_repositories": {
+    "Inter": "https://github.com/rsms/inter",
+    "IBM Plex Mono": "https://github.com/IBM/plex"
+  },
+  "files": [
+    {
+      "file": "InterVariable.woff2",
+      "family": "Inter",
+      "version": "4.1",
+      "revision": "e3a3d4c57d5ecc01453a575621882a384c1995a3",
+      "source_url": "https://raw.githubusercontent.com/rsms/inter/e3a3d4c57d5ecc01453a575621882a384c1995a3/docs/font-files/InterVariable.woff2",
+      "kind": "font",
+      "size_bytes": 352240,
+      "sha256": "693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3",
+      "font_version": "Version 4.001;git-9221beed3",
+      "coverage_check": {
+        "sample": "ÅÄÖåäö m² m³ CO₂ μ µ °C",
+        "missing": []
+      },
+      "variable_axes": {
+        "opsz": {
+          "minimum": 14.0,
+          "maximum": 32.0
+        },
+        "wght": {
+          "minimum": 100.0,
+          "maximum": 900.0
+        }
+      }
+    },
+    {
+      "file": "InterVariable-Italic.woff2",
+      "family": "Inter",
+      "version": "4.1",
+      "revision": "e3a3d4c57d5ecc01453a575621882a384c1995a3",
+      "source_url": "https://raw.githubusercontent.com/rsms/inter/e3a3d4c57d5ecc01453a575621882a384c1995a3/docs/font-files/InterVariable-Italic.woff2",
+      "kind": "font",
+      "size_bytes": 387976,
+      "sha256": "e564f652916db6c139570fefb9524a77c4d48f30c92928de9db19b6b5c7a262a",
+      "font_version": "Version 4.001;git-9221beed3",
+      "coverage_check": {
+        "sample": "ÅÄÖåäö m² m³ CO₂ μ µ °C",
+        "missing": []
+      },
+      "variable_axes": {
+        "opsz": {
+          "minimum": 14.0,
+          "maximum": 32.0
+        },
+        "wght": {
+          "minimum": 100.0,
+          "maximum": 900.0
+        }
+      }
+    },
+    {
+      "file": "IBMPlexMono-Regular.woff2",
+      "family": "IBM Plex Mono",
+      "revision": "71f558992315a12ca1f06a2215d57962a1992162",
+      "source_url": "https://raw.githubusercontent.com/IBM/plex/71f558992315a12ca1f06a2215d57962a1992162/packages/plex-mono/fonts/complete/woff2/IBMPlexMono-Regular.woff2",
+      "kind": "font",
+      "version": "2.5.0",
+      "size_bytes": 49248,
+      "sha256": "ba204497f16b6d334cee9d1e963a831b73e3a56e1d6300a8489d18df7214b350",
+      "font_version": "Version 2.005",
+      "coverage_check": {
+        "sample": "ÅÄÖåäö m² m³ CO₂ μ µ °C",
+        "missing": [
+          "μ"
+        ]
+      }
+    },
+    {
+      "file": "IBMPlexMono-Medium.woff2",
+      "family": "IBM Plex Mono",
+      "revision": "71f558992315a12ca1f06a2215d57962a1992162",
+      "source_url": "https://raw.githubusercontent.com/IBM/plex/71f558992315a12ca1f06a2215d57962a1992162/packages/plex-mono/fonts/complete/woff2/IBMPlexMono-Medium.woff2",
+      "kind": "font",
+      "version": "2.5.0",
+      "size_bytes": 50400,
+      "sha256": "33faf307fa6031fb4062276d7320a6d632de890cbb347576fd80cfa01077bc25",
+      "font_version": "Version 2.005",
+      "coverage_check": {
+        "sample": "ÅÄÖåäö m² m³ CO₂ μ µ °C",
+        "missing": [
+          "μ"
+        ]
+      }
+    },
+    {
+      "file": "INTER-OFL.txt",
+      "family": "Inter",
+      "version": "4.1",
+      "revision": "e3a3d4c57d5ecc01453a575621882a384c1995a3",
+      "source_url": "https://raw.githubusercontent.com/rsms/inter/e3a3d4c57d5ecc01453a575621882a384c1995a3/LICENSE.txt",
+      "kind": "license",
+      "size_bytes": 4380,
+      "sha256": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a"
+    },
+    {
+      "file": "IBM-PLEX-OFL.txt",
+      "family": "IBM Plex Mono",
+      "revision": "71f558992315a12ca1f06a2215d57962a1992162",
+      "source_url": "https://raw.githubusercontent.com/IBM/plex/71f558992315a12ca1f06a2215d57962a1992162/LICENSE.txt",
+      "kind": "license",
+      "version": "2.5.0",
+      "size_bytes": 4456,
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+    }
+  ],
+  "glyph_fallback": {
+    "character": "μ",
+    "codepoint": "U+03BC",
+    "unavailable_in": [
+      "IBMPlexMono-Regular.woff2",
+      "IBMPlexMono-Medium.woff2"
+    ],
+    "fallback_family": "Inter",
+    "note": "Keep Inter after IBM Plex Mono in CSS font stacks; do not substitute the distinct micro sign U+00B5 in scientific text."
+  }
+}

@@ -1,0 +1,490 @@
+{
+  "name": "EPSM Pocket CAD",
+  "version": "1.0.0",
+  "grid_size": 32,
+  "license": "MIT",
+  "attribution": "EPSM contributors",
+  "source": "source.json",
+  "source_file_sha256": "65be3f9b8a36dedb1c690e0c86b0769222e08e9afe79a3bac30014832328d58f",
+  "palette": {
+    "I": "#252B2B",
+    "C": "#F1E9D6",
+    "T": "#B5B2A8",
+    "S": "#777D78",
+    "R": "#E9543F"
+  },
+  "png_sizes": [
+    32,
+    64,
+    128,
+    256,
+    512
+  ],
+  "dark_variant": "One cream pixel around the silhouette; original pixel colours preserved.",
+  "hash_algorithm": "sha256",
+  "path_base": "icons/",
+  "icons": [
+    {
+      "id": "epsm",
+      "label": "EPSM",
+      "role": "The platform: an open building cell with one active inner wall.",
+      "sourcehash": "61fdb56622a2e4bbab4bff525b5eb46d7c8f0426582d598670bc5404c3345daa",
+      "files": {
+        "svg": "svg/epsm.svg",
+        "dark_svg": "svg/dark/epsm.svg",
+        "png": {
+          "32": "png/32/epsm.png",
+          "64": "png/64/epsm.png",
+          "128": "png/128/epsm.png",
+          "256": "png/256/epsm.png",
+          "512": "png/512/epsm.png"
+        },
+        "dark_png": {
+          "32": "png/dark/32/epsm.png",
+          "64": "png/dark/64/epsm.png",
+          "128": "png/dark/128/epsm.png",
+          "256": "png/dark/256/epsm.png",
+          "512": "png/dark/512/epsm.png"
+        }
+      },
+      "filehashes": {
+        "svg/epsm.svg": "c71aade1260601df852126dc06ed2a133c3208b885b5311bceedcd58cc935c72",
+        "svg/dark/epsm.svg": "4f9584befff7ff2f264b15633fbdd8d02922ec228c8c517290b01c7d1ca2e42a",
+        "png/32/epsm.png": "7f5533c2bd256d208ee3e47a45271c130725e17fcd05fbea58c3678649498247",
+        "png/64/epsm.png": "1fe0c8b46c4af800fde10c1bfa1945ef082203534be4abb52f1dcaaeb4850a5f",
+        "png/128/epsm.png": "b3a648a77d1f62ad60b47f7b6af60fc9278df8add2e63545b7570eeb200d8f64",
+        "png/256/epsm.png": "d08b29e13ae1f494bbe1eaf171641c8d16d5ecf238c7f5f0b100fa989b8a97ae",
+        "png/512/epsm.png": "0aad8137ed45e6d92acbe12ea0aa9fd9d9b9b57c4196570d12a054b12af16f38",
+        "png/dark/32/epsm.png": "9d2a733ffe768141fb3e963f8fb9b3e23452cca5365138b4ca479e75251e4af5",
+        "png/dark/64/epsm.png": "8cb93b19142c798cb64fd85c1e34722b401a1ba51b7c59eaf9860217cacb62d6",
+        "png/dark/128/epsm.png": "6e01f89f6150957a4798e60ee8b83e29226fd048b1eec53d2b01b5be7adb6ffb",
+        "png/dark/256/epsm.png": "091f3a8e1f0ab3fea0b467ceb28f30581b0135875013651f08f19d0d2dbe7aad",
+        "png/dark/512/epsm.png": "a012c04560f7aab67a3cc512fb997ae77030b3f25ff76d35758aae497ac3623c"
+      }
+    },
+    {
+      "id": "epsm_core",
+      "label": "EPSM Core",
+      "role": "Physical building geometry: the same open cell with its base active.",
+      "sourcehash": "4009e7cdaf4a292227a6900f1f9b3ca620108dd5b37c2a751d015c12529e6eab",
+      "files": {
+        "svg": "svg/epsm_core.svg",
+        "dark_svg": "svg/dark/epsm_core.svg",
+        "png": {
+          "32": "png/32/epsm_core.png",
+          "64": "png/64/epsm_core.png",
+          "128": "png/128/epsm_core.png",
+          "256": "png/256/epsm_core.png",
+          "512": "png/512/epsm_core.png"
+        },
+        "dark_png": {
+          "32": "png/dark/32/epsm_core.png",
+          "64": "png/dark/64/epsm_core.png",
+          "128": "png/dark/128/epsm_core.png",
+          "256": "png/dark/256/epsm_core.png",
+          "512": "png/dark/512/epsm_core.png"
+        }
+      },
+      "filehashes": {
+        "svg/epsm_core.svg": "8374b71c639a78f93f7c212849f35f3dc061b01f61ffed32015e7cb3e4b3d3ea",
+        "svg/dark/epsm_core.svg": "06f5a8e587b6155289efac0d7670b13b91bd05fe262b6937fb029cd86b4877fe",
+        "png/32/epsm_core.png": "fbe8082c418fa85f0b7d1eba18c02c382ef0a33a0b2f6f5d8daaf83c746a1600",
+        "png/64/epsm_core.png": "8d7905a8897a8947ba06ff4b6a9b67629a4d46b8824e9325df2e4b12a4c9390e",
+        "png/128/epsm_core.png": "91afe3504e695bc5b94db9e488426859569c0acccdbde6a4d1235234efba8e49",
+        "png/256/epsm_core.png": "b60e00c74fde2686d8293c440f209affb49b3a88b46351793426924fa3845b64",
+        "png/512/epsm_core.png": "8e0e1846946668450213a5331e3e6a8e19a79ea1da82b345d7207c08627bdeab",
+        "png/dark/32/epsm_core.png": "6f75f86ec90d8cc9e14455e6e77e5c1cff126a7e6a6f95088630a410e3d30639",
+        "png/dark/64/epsm_core.png": "a9f37764612d54f00075e58f0119c1759d2e953d563d20f33d9bf48f87df4758",
+        "png/dark/128/epsm_core.png": "4a265ae104dffebfea6097d130ad21a0a8555a47994dc4aeb14caed34426bcd0",
+        "png/dark/256/epsm_core.png": "fd3b67d1e626b67b71deedd7ea17be14036386b28ff66bf4b4a382b7a9d870ab",
+        "png/dark/512/epsm_core.png": "5d6a1c6e9a19c1d1f9064032f4579b249a42c3f3ab1da9d03872aba18a6c1074"
+      }
+    },
+    {
+      "id": "epsm_data",
+      "label": "EPSM Data",
+      "role": "Three material and assumption panels; the middle panel is the effective selection.",
+      "sourcehash": "51a49c06ffa68859405660b6c1fe5e50139b26fc2efe617d65a6f19f435e3c00",
+      "files": {
+        "svg": "svg/epsm_data.svg",
+        "dark_svg": "svg/dark/epsm_data.svg",
+        "png": {
+          "32": "png/32/epsm_data.png",
+          "64": "png/64/epsm_data.png",
+          "128": "png/128/epsm_data.png",
+          "256": "png/256/epsm_data.png",
+          "512": "png/512/epsm_data.png"
+        },
+        "dark_png": {
+          "32": "png/dark/32/epsm_data.png",
+          "64": "png/dark/64/epsm_data.png",
+          "128": "png/dark/128/epsm_data.png",
+          "256": "png/dark/256/epsm_data.png",
+          "512": "png/dark/512/epsm_data.png"
+        }
+      },
+      "filehashes": {
+        "svg/epsm_data.svg": "f03c6f1a142d0066030efa5931c32688a4881a3d0d5c370c78abc6dec692662e",
+        "svg/dark/epsm_data.svg": "17837a84a0151069dc7de8939140185fae4d2d7b482d621d7282cd3e4a0adcce",
+        "png/32/epsm_data.png": "1dda902f920e56170508a5a20dbf8ca652aac4b551529b7325188d218078251c",
+        "png/64/epsm_data.png": "194befdc4772d0fef5120b32c3d5fce217af929a777af529e40129d635e76846",
+        "png/128/epsm_data.png": "48cfcef5edf2df0cac80a14d0b0d8a5e37eb89728ac0758a6b1d332b7338c843",
+        "png/256/epsm_data.png": "6b71ec62bb7d703257172bf0fc064706b9b2684693ee33c69e0ad804dcc9cd6c",
+        "png/512/epsm_data.png": "c1044151fb4fdfd51c1ea5350314cdef08eaedfdd24f047e6868a218a40e4463",
+        "png/dark/32/epsm_data.png": "50221d24ebaf1b9616b05be40a9c4f7a326a1d02e97f9d6b02065437318d7fe9",
+        "png/dark/64/epsm_data.png": "0cad0eb65ff4fd17410ed1854a313957b724237b971c248b373c7e189abfa939",
+        "png/dark/128/epsm_data.png": "e4a7651cfc9651d46ceb1ebfbaf8f92f3171b06e0ebab377bc4ce82e7dff4155",
+        "png/dark/256/epsm_data.png": "d4f4c535aa832ea39766ffb647b66b5364dd9ba899cd0e1d7adf3c8617a00e56",
+        "png/dark/512/epsm_data.png": "93714ee8d05a99fda94bdb1a16c9adba0599ac5e3565da49629c6ba49905b3fb"
+      }
+    },
+    {
+      "id": "epsm_db",
+      "label": "EPSM DB",
+      "role": "Three record drawers with one active record label; persisted catalogue storage.",
+      "sourcehash": "8f38e414d6fb063580921dfa91c98244a1dc7759c8516c913b1114a4a34fa03b",
+      "files": {
+        "svg": "svg/epsm_db.svg",
+        "dark_svg": "svg/dark/epsm_db.svg",
+        "png": {
+          "32": "png/32/epsm_db.png",
+          "64": "png/64/epsm_db.png",
+          "128": "png/128/epsm_db.png",
+          "256": "png/256/epsm_db.png",
+          "512": "png/512/epsm_db.png"
+        },
+        "dark_png": {
+          "32": "png/dark/32/epsm_db.png",
+          "64": "png/dark/64/epsm_db.png",
+          "128": "png/dark/128/epsm_db.png",
+          "256": "png/dark/256/epsm_db.png",
+          "512": "png/dark/512/epsm_db.png"
+        }
+      },
+      "filehashes": {
+        "svg/epsm_db.svg": "35fe077984132b1791dd6603adb70fe2d38e578132b6273b330231f5cd481b6a",
+        "svg/dark/epsm_db.svg": "67f41b93a93f3f53dd634f497b1b0755240a2eaa4248c8e273b1f9dfb748c670",
+        "png/32/epsm_db.png": "5998d5965dae984430de1ddb65ff51d11cd1339c008f75642bc9a353bca446d4",
+        "png/64/epsm_db.png": "738d39a86ca76d489e501dd0076108ed480ef160bec5e309b3034cc0a12209cb",
+        "png/128/epsm_db.png": "fcb47efb01619bcc981e20e96ee8d3a43537aa906e8dd74ca60bfee0f6248440",
+        "png/256/epsm_db.png": "f3f01b40ed4c292f744d7d4b868f3be511b80e35119701348637d6d156bd70f9",
+        "png/512/epsm_db.png": "230db812ce3f12c44f695de52ba6b59a519e12f04cb1a81190038d321ce89bf2",
+        "png/dark/32/epsm_db.png": "ad77711db85049aa940392da01739c2ec19fb508371402bbeef4e99a301bff4f",
+        "png/dark/64/epsm_db.png": "08acb0ed5d607ec904af8e0bf8338a40e0d73fab65c1f8385187103c2ad0aa5b",
+        "png/dark/128/epsm_db.png": "8d1cceaee7f44072f35fa5b4db881746c1424768873ca627836fc805ef8846f1",
+        "png/dark/256/epsm_db.png": "d0bfddc006013e4749738fdc525aa06f67a7dfd3893554d2129199f2e23632d5",
+        "png/dark/512/epsm_db.png": "981aa36f9971fd7b4f872c348c5ad18023a8ae7e8eb6f19e1246a145740812f0"
+      }
+    },
+    {
+      "id": "epsm_rc",
+      "label": "EPSM RC",
+      "role": "Thermal RC network: input, resistor, active junction and output; a capacitor branches from the junction to ground.",
+      "sourcehash": "355a109de57c83733e202e4b218f3b930306a28024fc4df6aaecfeb7dc8eb77f",
+      "files": {
+        "svg": "svg/epsm_rc.svg",
+        "dark_svg": "svg/dark/epsm_rc.svg",
+        "png": {
+          "32": "png/32/epsm_rc.png",
+          "64": "png/64/epsm_rc.png",
+          "128": "png/128/epsm_rc.png",
+          "256": "png/256/epsm_rc.png",
+          "512": "png/512/epsm_rc.png"
+        },
+        "dark_png": {
+          "32": "png/dark/32/epsm_rc.png",
+          "64": "png/dark/64/epsm_rc.png",
+          "128": "png/dark/128/epsm_rc.png",
+          "256": "png/dark/256/epsm_rc.png",
+          "512": "png/dark/512/epsm_rc.png"
+        }
+      },
+      "filehashes": {
+        "svg/epsm_rc.svg": "8a9ac7ab151de2fbd7f5a60b3d327e533b28268e1814d743254e4f12fa46943f",
+        "svg/dark/epsm_rc.svg": "2e6287faeeac3419d80930c27f0f19854ab89ea9e42ac82906c9fc623ec42b04",
+        "png/32/epsm_rc.png": "43c167e3db5ef39e8616c084814c5788d47fafeae8d03243c83bec0ede66cc6d",
+        "png/64/epsm_rc.png": "9a5774511a325606376083ae2332cbacb104904572007b85a41f88e2f481ef41",
+        "png/128/epsm_rc.png": "8cd61eb0a5ac0a2274fc517290d5809f41216fda3fac1f8a00792e811e8d6ec5",
+        "png/256/epsm_rc.png": "d9d2466c8e150deb03f7c0ee2fe09123e21823d6bebc16a3b29580fe733ab443",
+        "png/512/epsm_rc.png": "5e2074e47961f782cf87e68eade85cf1e63d7dfc800c50a8df9232087576142b",
+        "png/dark/32/epsm_rc.png": "e0996f86fc31d9979baab615d4ef29eaf2243587e4828ca42cf3fcb48866a2be",
+        "png/dark/64/epsm_rc.png": "159f8d0eee6abb008dcfed3ebb0a9855ca6fbbc9633d65f9835b622044562efb",
+        "png/dark/128/epsm_rc.png": "4e2ee2e07789e7af1a3efa988beed71cfad1b5110bf5f132a24fec8404855ed8",
+        "png/dark/256/epsm_rc.png": "594bb5de0f959872945569fb8c182bad64af05e3b171ca9181cd2facb9799eda",
+        "png/dark/512/epsm_rc.png": "82270cd1db4ef03c15e48ca5209aa4d975afce8acce4b5ebd37a326808d8de4b"
+      }
+    },
+    {
+      "id": "epsm_lca",
+      "label": "EPSM LCA",
+      "role": "One assessed material block inside a lifecycle loop; the active face identifies the assessed element.",
+      "sourcehash": "fde8021e4e3ab314c4f64237beaf044ad25e46560b44129f514febdf17262157",
+      "files": {
+        "svg": "svg/epsm_lca.svg",
+        "dark_svg": "svg/dark/epsm_lca.svg",
+        "png": {
+          "32": "png/32/epsm_lca.png",
+          "64": "png/64/epsm_lca.png",
+          "128": "png/128/epsm_lca.png",
+          "256": "png/256/epsm_lca.png",
+          "512": "png/512/epsm_lca.png"
+        },
+        "dark_png": {
+          "32": "png/dark/32/epsm_lca.png",
+          "64": "png/dark/64/epsm_lca.png",
+          "128": "png/dark/128/epsm_lca.png",
+          "256": "png/dark/256/epsm_lca.png",
+          "512": "png/dark/512/epsm_lca.png"
+        }
+      },
+      "filehashes": {
+        "svg/epsm_lca.svg": "f25670a13459b162fa1e3a64d518c10358e39fb91615267e4af193ddb713cb29",
+        "svg/dark/epsm_lca.svg": "851d6dc245023c2521f4e68cef00c413aba765be04d5732e06188dcdb917c26a",
+        "png/32/epsm_lca.png": "0a9933547871b74ca763ef00946d2124660a88a517cdd782b319184ad603d341",
+        "png/64/epsm_lca.png": "90a9e7a3e5fcdb77d092d3e26b8a7e778199e1d42d201931802c77e8599d40aa",
+        "png/128/epsm_lca.png": "0f625aafcd03761874a854ee264908c6cbf63250ecddd3dc1dd233f5fef55ee9",
+        "png/256/epsm_lca.png": "57afe345556c63c3dea117d721867fd1fac0ba35b090ea2c037dc075b8e83881",
+        "png/512/epsm_lca.png": "ad25d33f58774c6845c3e21e5da995987f67e00219b320de020c8e0da5187efe",
+        "png/dark/32/epsm_lca.png": "cbb4a649659d953d0d6f5f5ac36d4bd4948994ed18b2157b6b01e79159d94296",
+        "png/dark/64/epsm_lca.png": "99f2c71dcbd20cb7e706c07533c008926a78be8589297ca60967a01e772a140a",
+        "png/dark/128/epsm_lca.png": "54b39af69b1e057fef1d9c096ddb84b43caf925ad97121303e8b6556a8a0b24a",
+        "png/dark/256/epsm_lca.png": "4ec2257011785f3e74ac74e430e2adc0000f0e6b46ff32b36e5ea88f0678154f",
+        "png/dark/512/epsm_lca.png": "d3c67dbeeaa79cc56db6d4c2c38f403ea191c14a3193b6a943f49ba7ce9da2da"
+      }
+    },
+    {
+      "id": "epsm_workflows",
+      "label": "EPSM Workflows",
+      "role": "Three linked modelling stages; the central stage is active.",
+      "sourcehash": "7076b579f46114b52898eaea808a7aef096ae26b472eb98ccbfedc32435f19a4",
+      "files": {
+        "svg": "svg/epsm_workflows.svg",
+        "dark_svg": "svg/dark/epsm_workflows.svg",
+        "png": {
+          "32": "png/32/epsm_workflows.png",
+          "64": "png/64/epsm_workflows.png",
+          "128": "png/128/epsm_workflows.png",
+          "256": "png/256/epsm_workflows.png",
+          "512": "png/512/epsm_workflows.png"
+        },
+        "dark_png": {
+          "32": "png/dark/32/epsm_workflows.png",
+          "64": "png/dark/64/epsm_workflows.png",
+          "128": "png/dark/128/epsm_workflows.png",
+          "256": "png/dark/256/epsm_workflows.png",
+          "512": "png/dark/512/epsm_workflows.png"
+        }
+      },
+      "filehashes": {
+        "svg/epsm_workflows.svg": "c5915ede81664ac72e487c91d75e57c6e3cbd4c9a316b86a3f594e6e12ac3860",
+        "svg/dark/epsm_workflows.svg": "06c5d95babd01d0ba7133ec9b0da3f0b5d845bf4b35a85594efcb5688cded7d6",
+        "png/32/epsm_workflows.png": "06c6d98b7f3f256ab802e7f11ef1fc22b1ba8e610aaed1ca1967d62c8a201745",
+        "png/64/epsm_workflows.png": "7b7a0fc5a95758655723557b28aca74df4d4321358e11047fac243e8bcad83f1",
+        "png/128/epsm_workflows.png": "3f0513f1334b45944ec0ddae2198d6e41e1c2a134ae196d051f6a14e385fb1ea",
+        "png/256/epsm_workflows.png": "6d9b45944c1b6347a66309e5f404df935dac1af7df2cef8dd129c05395b26ddc",
+        "png/512/epsm_workflows.png": "16d51557aaf83e6720a7336162a25638dd1253e117a227676b897e46c2220bab",
+        "png/dark/32/epsm_workflows.png": "75df0fc31a21d9ff23e382a49bb887af5de1a152508c7508ae31ec35c4b7c65a",
+        "png/dark/64/epsm_workflows.png": "63215a0eb0fec1468c00b3e527809d5e0a83f200e8d1c1b5523f751cf55566aa",
+        "png/dark/128/epsm_workflows.png": "cc106c4e1feb0270e05a94e1af04a8e4e4c0a3b427e047f1e979da4200dc785d",
+        "png/dark/256/epsm_workflows.png": "fdaaec609e7e1a2bfe8bbf931881af6f5c5d5bf2bfcb3a9821f3179c339d975c",
+        "png/dark/512/epsm_workflows.png": "4d8f0c3d5f75fe8bea3feda7ec323326cac52adac8b6ded8fd577cfca620894b"
+      }
+    },
+    {
+      "id": "epsm_studies",
+      "label": "EPSM Studies",
+      "role": "A study report with one highlighted result bar; experiment documentation and evidence.",
+      "sourcehash": "8688befc5aa95df361c78c7baa2ee6cfdcb9900eb50dea6002af69fd55a7d9ac",
+      "files": {
+        "svg": "svg/epsm_studies.svg",
+        "dark_svg": "svg/dark/epsm_studies.svg",
+        "png": {
+          "32": "png/32/epsm_studies.png",
+          "64": "png/64/epsm_studies.png",
+          "128": "png/128/epsm_studies.png",
+          "256": "png/256/epsm_studies.png",
+          "512": "png/512/epsm_studies.png"
+        },
+        "dark_png": {
+          "32": "png/dark/32/epsm_studies.png",
+          "64": "png/dark/64/epsm_studies.png",
+          "128": "png/dark/128/epsm_studies.png",
+          "256": "png/dark/256/epsm_studies.png",
+          "512": "png/dark/512/epsm_studies.png"
+        }
+      },
+      "filehashes": {
+        "svg/epsm_studies.svg": "f6f74470b607fd8c2495d871d0b8271426b8baf0460e9543f53db04bb4b2cf37",
+        "svg/dark/epsm_studies.svg": "8549935a5042a1d256886ae415d15c2e99869b6ecfdbbebe899f8d981ed6995a",
+        "png/32/epsm_studies.png": "a458c527638a6f613d6c859225dd6ea8f38a1008e393f78c5599c3e92f105fc8",
+        "png/64/epsm_studies.png": "4afee20f9e95f8644ce7d98630b4c589e055c7939ccce9f996846628f91199a2",
+        "png/128/epsm_studies.png": "601ba886250a853435812c06424472720abebeef312cfc2d35941957a7e175f3",
+        "png/256/epsm_studies.png": "bed635fb888ca3735baf406af359524cf6c0f0614aa7eede267f540f6fa23eae",
+        "png/512/epsm_studies.png": "7fddc7fc557e2fe6a0924b906cb8eeac6cb78b7ea7ae6e71d996692146f287ae",
+        "png/dark/32/epsm_studies.png": "f43597de7db221ce4c57c5a6c3afe4c53d01b23140b36a6cba094f14ab7968e1",
+        "png/dark/64/epsm_studies.png": "41d9d1583cfa07c2f4b59145ec5d9b08ce754a3b841a13dc8d2d12f947c7291b",
+        "png/dark/128/epsm_studies.png": "410cf05a1dabf40fdee444286048df01ef073a2e83c254154d42e5873192abdd",
+        "png/dark/256/epsm_studies.png": "80ff7c32eb021ed160f6abd9a7d31ed1e7dc068ee3b124b58441b58bb6d07ae0",
+        "png/dark/512/epsm_studies.png": "45e8fc6e79b101ecc1c91f607925a131ff6377708ed437783d7c752dabd1b3e6"
+      }
+    },
+    {
+      "id": "epsm_development",
+      "label": "EPSM Development",
+      "role": "An open engineering handbook; the active right page represents shared development guidance.",
+      "sourcehash": "f6315a7493e120171feb1dd3bd74af6bc595cb73cd41daeb1244f8b901ac2eb2",
+      "files": {
+        "svg": "svg/epsm_development.svg",
+        "dark_svg": "svg/dark/epsm_development.svg",
+        "png": {
+          "32": "png/32/epsm_development.png",
+          "64": "png/64/epsm_development.png",
+          "128": "png/128/epsm_development.png",
+          "256": "png/256/epsm_development.png",
+          "512": "png/512/epsm_development.png"
+        },
+        "dark_png": {
+          "32": "png/dark/32/epsm_development.png",
+          "64": "png/dark/64/epsm_development.png",
+          "128": "png/dark/128/epsm_development.png",
+          "256": "png/dark/256/epsm_development.png",
+          "512": "png/dark/512/epsm_development.png"
+        }
+      },
+      "filehashes": {
+        "svg/epsm_development.svg": "5bb996cad075471421474157c2b5f2c53713dfc7c94997db3cf97c9bb4082749",
+        "svg/dark/epsm_development.svg": "c1ecb883094257fbd664716974d8e1c4241c68919953f0b04114e699f0157ae4",
+        "png/32/epsm_development.png": "fb84e746ca52c2e877fa927290d656e5f38a892f9073d1bc5bdccfc6e6a1e320",
+        "png/64/epsm_development.png": "68a2ec69d978a434a073d772c9077f529f5274ca28c167879b2a9adbebfced6d",
+        "png/128/epsm_development.png": "243bb4b4ea60835a513ee07dcee4ac6e5f8668ce991625ec5c4b113505d198b8",
+        "png/256/epsm_development.png": "e4a177d6951e9e443f4884e73e193aec5bb76a62b1a0a68c2b442f14b5f62006",
+        "png/512/epsm_development.png": "b7ad1c66d6560369d1788e57060f19118bc768f3d3eba2cd1298bab6623c0855",
+        "png/dark/32/epsm_development.png": "5820aa0449674a8fdb23d0fbd872a9bd6c62cecb03ab7d20563c47b59b2f11a2",
+        "png/dark/64/epsm_development.png": "820c976f6ece9fa644add326f175c9ff28b8d3cfd4c1e80ddd9d0322934ade28",
+        "png/dark/128/epsm_development.png": "3a9691ff3c0f2543c1d1bf8d38dcb5006152dccd3b9ef451b7341ba734337e6c",
+        "png/dark/256/epsm_development.png": "4d97f9b400f29223dc7cfd82e8cb8668728b1350770e0ea0b86c43bd94a43e55",
+        "png/dark/512/epsm_development.png": "8d417a86ea228aba138d5263d321dab29041af73f7079a048be45759d667bffb"
+      }
+    },
+    {
+      "id": "epsm_studio",
+      "label": "EPSM Studio",
+      "role": "A scientific workspace window containing the shared editable building cell.",
+      "sourcehash": "8da777b8c6814998d999fb2081b1ac1a6737437e03be4fa94b165bf31a08a054",
+      "files": {
+        "svg": "svg/epsm_studio.svg",
+        "dark_svg": "svg/dark/epsm_studio.svg",
+        "png": {
+          "32": "png/32/epsm_studio.png",
+          "64": "png/64/epsm_studio.png",
+          "128": "png/128/epsm_studio.png",
+          "256": "png/256/epsm_studio.png",
+          "512": "png/512/epsm_studio.png"
+        },
+        "dark_png": {
+          "32": "png/dark/32/epsm_studio.png",
+          "64": "png/dark/64/epsm_studio.png",
+          "128": "png/dark/128/epsm_studio.png",
+          "256": "png/dark/256/epsm_studio.png",
+          "512": "png/dark/512/epsm_studio.png"
+        }
+      },
+      "filehashes": {
+        "svg/epsm_studio.svg": "0aa3c6ba97457407e6ee5ddbc27479720c9182dce79c826a79decaf2345e02f0",
+        "svg/dark/epsm_studio.svg": "b57bfd0e37ab95200641ed85fabd5dc40175a319aad637d573f5c4efa266f84d",
+        "png/32/epsm_studio.png": "5bcba2a74bbead02b63f00a51ec87b92d3407c1028e136e27577ffdf848ed1dd",
+        "png/64/epsm_studio.png": "69a55e9a342b6055741d2cf79074d3fc060fe180acda4c4d58fc276418cf9f16",
+        "png/128/epsm_studio.png": "2035ce888ef3a5479b894a96b9d642a4a92678bacf1d7f79a443dc12dc5d58a1",
+        "png/256/epsm_studio.png": "55cbab366fb9067c9911b0dc83f5bcac1e2b4bbf043bcfaf2406d81b775d56be",
+        "png/512/epsm_studio.png": "e9d2a2878a1fe9607a9d10372057169eaaf5197bf149cb6f77f06dc37279bedd",
+        "png/dark/32/epsm_studio.png": "dcc9de11e85b654712c91005f9ac0797bac5ac8dbc0e131656a2deaa89d0e623",
+        "png/dark/64/epsm_studio.png": "940ab1f30dafd2bdfb45808880a0ff14553de9bfba34a8716ffd6f8fec303cab",
+        "png/dark/128/epsm_studio.png": "4542fce203ed932c0a63f94283fbb7bfc4d84d920fe26e5723393ec79af2dee2",
+        "png/dark/256/epsm_studio.png": "49af4bf8f1d30daedd53a43461f27d6af9fef751f721e272a4530456cb13246c",
+        "png/dark/512/epsm_studio.png": "195800cc64b3bbfbc64fc1ca954876a5138b0729b7488b43475afff9ddfd0f4e"
+      }
+    },
+    {
+      "id": "epsm_viewer",
+      "label": "EPSM Viewer",
+      "role": "An inspection lens around the same open building cell; scene inspection and rendering.",
+      "sourcehash": "d4ca24753319d4d90e5b0cc098aa93c2b8133aa3621c26f94937c3d41eb74110",
+      "files": {
+        "svg": "svg/epsm_viewer.svg",
+        "dark_svg": "svg/dark/epsm_viewer.svg",
+        "png": {
+          "32": "png/32/epsm_viewer.png",
+          "64": "png/64/epsm_viewer.png",
+          "128": "png/128/epsm_viewer.png",
+          "256": "png/256/epsm_viewer.png",
+          "512": "png/512/epsm_viewer.png"
+        },
+        "dark_png": {
+          "32": "png/dark/32/epsm_viewer.png",
+          "64": "png/dark/64/epsm_viewer.png",
+          "128": "png/dark/128/epsm_viewer.png",
+          "256": "png/dark/256/epsm_viewer.png",
+          "512": "png/dark/512/epsm_viewer.png"
+        }
+      },
+      "filehashes": {
+        "svg/epsm_viewer.svg": "8136327b634373e2b4a8d81fc2da7c3b52060de2fef301831f519ea4e91457bd",
+        "svg/dark/epsm_viewer.svg": "f4cc83075fd4142d722027aae7bc3441ed2f7673dd3567cd15afda6751185aaa",
+        "png/32/epsm_viewer.png": "5315c3acd9c05a6ec643d827b3a9874234a2ec1f48a9b9cd033f72493a5aea8d",
+        "png/64/epsm_viewer.png": "bd6ddadac5ae8e3baebe24eb6f33510924e42925c5034abf020abebacf5149a0",
+        "png/128/epsm_viewer.png": "3bd0586b6b468b1309d5e585b86266837730deb52fb139d38d7e416a113ff1f6",
+        "png/256/epsm_viewer.png": "80123a2f0546945e70dde28b2f18522303ee36ff70ed7cc9dd3cd20be5ef9cc5",
+        "png/512/epsm_viewer.png": "be4170cbf098bc55f30056d71f2d8f9a44ff2211735a1d6c35df8cdd5454a14a",
+        "png/dark/32/epsm_viewer.png": "c77fd0c9e8474986b639b9e1153e90eb9604c58cd263d0207deb9eafe76cc294",
+        "png/dark/64/epsm_viewer.png": "c3139837d07de634d19ae1ed16c2a1e79ae16f302b7706b47418a8c4cdcdeb43",
+        "png/dark/128/epsm_viewer.png": "a14e285278171fb054c576c6f2e57031e474057086d48e83c3fc86222dc15f59",
+        "png/dark/256/epsm_viewer.png": "a56a8c4d8d6cb7668a614be80ae4ca22d269d1bc18076a291caf76b1c6f86148",
+        "png/dark/512/epsm_viewer.png": "e4eba202326c2a580dd57e7611ea45e0ff0ce046d8322d7dc9ddd012c659f428"
+      }
+    },
+    {
+      "id": "smhi2epw",
+      "label": "SMHI to EPW",
+      "role": "A weather calendar and cloud with one active sample day; weather-series preparation for EPW.",
+      "sourcehash": "89b44c60c29f821917d185693b628947ec5d5192bbf5548da0f520a9890127ce",
+      "files": {
+        "svg": "svg/smhi2epw.svg",
+        "dark_svg": "svg/dark/smhi2epw.svg",
+        "png": {
+          "32": "png/32/smhi2epw.png",
+          "64": "png/64/smhi2epw.png",
+          "128": "png/128/smhi2epw.png",
+          "256": "png/256/smhi2epw.png",
+          "512": "png/512/smhi2epw.png"
+        },
+        "dark_png": {
+          "32": "png/dark/32/smhi2epw.png",
+          "64": "png/dark/64/smhi2epw.png",
+          "128": "png/dark/128/smhi2epw.png",
+          "256": "png/dark/256/smhi2epw.png",
+          "512": "png/dark/512/smhi2epw.png"
+        }
+      },
+      "filehashes": {
+        "svg/smhi2epw.svg": "42a8ef232441eb427ce8f6b8566688e8d7550fa0ff65273a534623e38e0fdf6c",
+        "svg/dark/smhi2epw.svg": "5a9f39dc660c5aeda6db25b158afa3f79d61b97f7c82b2c16976f8c36b55dad5",
+        "png/32/smhi2epw.png": "6da9ef8b38151d43cb072ca0d1f2b29d4767ec09f192652516ceac47042496b9",
+        "png/64/smhi2epw.png": "0a3b216710d2dfe9ef874275d69281e478c936206d9e711574d3bf7f929bb695",
+        "png/128/smhi2epw.png": "2d0a1a20003ce271761558d34565835428ae6e945c0aff73e55d23d1aaab7b5b",
+        "png/256/smhi2epw.png": "4c4b4ddf2a18ba66db31d7b219e3c7d570df866271e73a7a8b20e108e6f719e3",
+        "png/512/smhi2epw.png": "58c3005fba795e1cbccecaf1bfc522f53683f86486ce83454ce1bd60ef91a1b6",
+        "png/dark/32/smhi2epw.png": "65c8f16cd4a914123af65da372955d5b4ee429f89ff9cef9a759cbd26d73ae61",
+        "png/dark/64/smhi2epw.png": "d37c55447a01c66949c6f857ba3965e0e1df5cc2104a4f69a6b7bb39fb8200f0",
+        "png/dark/128/smhi2epw.png": "5e4d2d9a1648f2f80335cf1a150ba6af488623de47d2d013f9d958cd57bc476f",
+        "png/dark/256/smhi2epw.png": "167a3b3248bd69da638c9b2a864a3459148c9bf779dd4acf6de78e95ed25ca1c",
+        "png/dark/512/smhi2epw.png": "eadd3d792a21b9e52e1e40eed310794c4bf7cef9f049c088a65f3deb06a79797"
+      }
+    }
+  ],
+  "packfiles": {
+    "sprite.svg": "3f0f40183d367eaca315a7c1b6f520bbee1715fbd65b61a41d21bd6d271e1bbd",
+    "catalogue.html": "3aefb7cd99750f91cf84d68fc7af479b9528c2a2b8185170a66870b305286474",
+    "contact-sheet.png": "6594d812b1692bd8399f4d8ad6682c04f0d15060aa9d0935acdf0477ae0957fb",
+    "contact-sheet-dark.png": "92de7ae47af71c64c95321854f081e83a15aec77ca05ac56da64b4a9b21d9e1f"
+  }
+}

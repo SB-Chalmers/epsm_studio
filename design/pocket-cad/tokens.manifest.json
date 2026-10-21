@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "version": "1.0.0",
+  "source": "tokens.json",
+  "source_sha256": "acb29a941836db0848c12ef04b838a413fabd8453bcaa4577f507f67106eba5d",
+  "exports": {
+    "tokens.css": "1e66a72c2e4d36b268e58e9591354abed4a900cb8e9a3da2d28d693797366c01",
+    "maps.json": "c81d94ea39ad6bc3483ae88fcd18d873a19f5f478650d93ff20e7d818cd5866c",
+    "preview-data.js": "9558b69f29ad6631b76c4344102e101e047835a631662b235cca825051cf959e"
+  }
+}
