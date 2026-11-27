@@ -9,6 +9,34 @@ ordinary work, follow the [EPSM branch and release policy](https://github.com/SB
 use a focused feature or `codex/` branch from `dev`, review into `dev`, then promote
 a checked release to `main`. Preserve unrelated local changes.
 
+## Issues first
+
+Every change starts with an issue, and every pull request fixes one or more issues.
+
+1. **Open or find an issue.** Search existing issues first. If none fits, open one
+   with the bug report or feature request template. Describe the problem or goal
+   and what "done" looks like. Small fixes such as typos still get a short issue.
+2. **Branch from `dev`.** Name the branch after the work (for example
+   `fix/123-login-redirect` or `codex/123-results-export`) and keep it to the
+   issue's scope. Unrelated changes get their own issue.
+3. **Open a pull request into `dev`.** Fill in the pull request template and link
+   every issue it resolves with a closing keyword, one per line:
+
+   ```text
+   Closes #123
+   Fixes #124
+   ```
+
+   Use `Refs #125` for related issues the pull request does not finish. A pull
+   request without a linked issue is not ready for review.
+4. **Merge closes the issue.** GitHub closes linked issues when the pull request
+   reaches the default branch. Until `dev` is promoted to `main`, close an issue by
+   hand once its pull request merges into `dev`, or leave it for the release that
+   promotes it.
+
+If work turns out larger than the issue, split it into follow-up issues instead of
+growing the pull request.
+
 ## Scope and ownership
 
 - `frontend/` contains the implemented React/Vite prototype. `backend/` describes
